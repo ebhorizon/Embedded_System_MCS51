@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C51 COMPILER V9.57.0.0   RELAY_MAIN                                                        06/11/2020 19:37:00 PAGE 1   
 
 
@@ -49,55 +48,3 @@ END OF MODULE INFORMATION.
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
-=======
-C51 COMPILER V9.57.0.0   RELAY_MAIN                                                        06/11/2020 19:37:00 PAGE 1   
-
-
-C51 COMPILER V9.57.0.0, COMPILATION OF MODULE RELAY_MAIN
-OBJECT MODULE PLACED IN ..\OBJ\Relay_main.obj
-COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE Relay_main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG OBJECTEX
-                    -TEND PRINT(.\Listings\Relay_main.lst) OBJECT(..\OBJ\Relay_main.obj)
-
-line level    source
-
-   1          #include <reg52.h>
-   2          #include "relay.h"
-   3          
-   4          // 定义常用类型
-   5          #ifndef u8
-              #define u8  unsigned char
-              #endif
-   8          #ifndef u16
-              #define u16 unsigned int
-              #endif
-  11          
-  12          void Delay(u16 t)
-  13          {
-  14   1              while(t--);
-  15   1      }
-  16          
-  17          void main()
-  18          {
-  19   1              while(1)
-  20   1              {
-  21   2                      Relay_Switch(1);
-  22   2                      Delay(60000);
-  23   2                      Relay_Switch(0);
-  24   2                      Delay(60000);
-  25   2              }
-  26   1      }
-
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     37    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
->>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e
