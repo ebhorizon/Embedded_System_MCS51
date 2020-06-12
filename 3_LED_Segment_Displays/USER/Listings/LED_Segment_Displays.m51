@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/27/2020  23:36:12  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/12/2020  14:08:33  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -36,11 +36,11 @@ LINK MAP OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
             CODE    01B8H     008BH     UNIT         ?PR?DIS8BIT?8SEG_CC_74XX138_MAIN
             CODE    0243H     006FH     UNIT         ?PR?DIS1BIT?8SEG_CC_74XX138_MAIN
             CODE    02B2H     0037H     UNIT         ?PR?__74XX138_SETLOW?74XX138
-            CODE    02E9H     001AH     UNIT         ?CO?8SEG_CC_74XX138
-            CODE    0303H     000CH     UNIT         ?C_C51STARTUP
-            CODE    030FH     0008H     UNIT         ?PR?MAIN?8SEG_CC_74XX138_MAIN
-            CODE    0317H     0008H     UNIT         ?CO?8SEG_CC_74XX138_MAIN
-            CODE    031FH     0007H     UNIT         ?PR?_LED_8SEG_DELAY?8SEG_CC_74XX138
+            CODE    02E9H     0012H     UNIT         ?CO?8SEG_CC_74XX138
+            CODE    02FBH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0307H     0008H     UNIT         ?PR?MAIN?8SEG_CC_74XX138_MAIN
+            CODE    030FH     0008H     UNIT         ?CO?8SEG_CC_74XX138_MAIN
+            CODE    0317H     0007H     UNIT         ?PR?_LED_8SEG_DELAY?8SEG_CC_74XX138
 
 
 
@@ -59,7 +59,7 @@ SEGMENT                                         DATA_GROUP
 
 ?PR?DIS1BIT?8SEG_CC_74XX138_MAIN              0008H    000BH
   +--> ?CO?8SEG_CC_74XX138_MAIN
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/27/2020  23:36:12  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:08:33  PAGE 2
 
 
   +--> ?PR?_LED_8SEG_DISPLAY?8SEG_CC_74XX138
@@ -86,10 +86,10 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:030FH         PUBLIC        main
+  C:0307H         PUBLIC        main
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0317H         SYMBOL        _?ix1000
+  C:030FH         SYMBOL        _?ix1000
   D:00C8H         PUBLIC        T2CON
   C:0243H         PUBLIC        Dis1Bit
   C:01B8H         PUBLIC        Dis8Bit
@@ -100,55 +100,55 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
   D:0009H         SYMBOL        disCode
   D:0011H         SYMBOL        t
   -------         ENDDO         
-  C:0243H         LINE#         10
-  C:0243H         LINE#         11
-  C:0243H         LINE#         12
-  C:0256H         LINE#         15
-  C:0259H         LINE#         16
-  C:0259H         LINE#         17
-  C:026FH         LINE#         18
-  C:0275H         LINE#         21
-  C:027BH         LINE#         22
-  C:027BH         LINE#         23
-  C:0295H         LINE#         24
-  C:02A8H         LINE#         25
-  C:02B1H         LINE#         26
+  C:0243H         LINE#         15
+  C:0243H         LINE#         16
+  C:0243H         LINE#         17
+  C:0256H         LINE#         20
+  C:0259H         LINE#         21
+  C:0259H         LINE#         22
+  C:026FH         LINE#         23
+  C:0275H         LINE#         26
+  C:027BH         LINE#         27
+  C:027BH         LINE#         28
+  C:0295H         LINE#         29
+  C:02A8H         LINE#         30
+  C:02B1H         LINE#         31
   -------         ENDPROC       DIS1BIT
   -------         PROC          DIS8BIT
   -------         DO            
   D:0008H         SYMBOL        i
   D:0009H         SYMBOL        disCode
   D:0011H         SYMBOL        t
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/27/2020  23:36:12  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:08:33  PAGE 3
 
 
   -------         ENDDO         
-  C:01B8H         LINE#         29
-  C:01B8H         LINE#         30
   C:01B8H         LINE#         34
-  C:01BBH         LINE#         35
-  C:01BBH         LINE#         36
-  C:01C9H         LINE#         37
-  C:01C9H         LINE#         38
-  C:01EAH         LINE#         39
-  C:01EAH         LINE#         41
-  C:01EAH         LINE#         42
-  C:0209H         LINE#         43
-  C:0209H         LINE#         46
-  C:020FH         LINE#         47
-  C:020FH         LINE#         48
-  C:0223H         LINE#         49
-  C:0236H         LINE#         50
-  C:0242H         LINE#         51
+  C:01B8H         LINE#         35
+  C:01B8H         LINE#         39
+  C:01BBH         LINE#         40
+  C:01BBH         LINE#         41
+  C:01C9H         LINE#         42
+  C:01C9H         LINE#         43
+  C:01EAH         LINE#         44
+  C:01EAH         LINE#         46
+  C:01EAH         LINE#         47
+  C:0209H         LINE#         48
+  C:0209H         LINE#         51
+  C:020FH         LINE#         52
+  C:020FH         LINE#         53
+  C:0223H         LINE#         54
+  C:0236H         LINE#         55
+  C:0242H         LINE#         56
   -------         ENDPROC       DIS8BIT
   -------         PROC          MAIN
-  C:030FH         LINE#         53
-  C:030FH         LINE#         54
-  C:030FH         LINE#         55
-  C:030FH         LINE#         56
-  C:030FH         LINE#         57
-  C:0312H         LINE#         58
-  C:0315H         LINE#         59
+  C:0307H         LINE#         58
+  C:0307H         LINE#         59
+  C:0307H         LINE#         60
+  C:0307H         LINE#         61
+  C:0307H         LINE#         62
+  C:030AH         LINE#         63
+  C:030DH         LINE#         64
   -------         ENDPROC       MAIN
   -------         ENDMOD        8SEG_CC_74XX138_MAIN
 
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
   C:02E8H         LINE#         12
   -------         ENDPROC       __74XX138_SETLOW
   -------         ENDMOD        74XX138
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/27/2020  23:36:12  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:08:33  PAGE 4
 
 
 
@@ -193,17 +193,16 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
   C:02E9H         PUBLIC        SegSel_CC
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:02FBH         PUBLIC        SegBit
   C:0126H         PUBLIC        _LED_8Seg_Display
-  C:031FH         PUBLIC        _LED_8Seg_Delay
+  C:0317H         PUBLIC        _LED_8Seg_Delay
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          _LED_8SEG_DELAY
   D:0007H         SYMBOL        t
-  C:031FH         LINE#         10
-  C:031FH         LINE#         11
-  C:031FH         LINE#         12
-  C:0325H         LINE#         13
+  C:0317H         LINE#         8
+  C:0317H         LINE#         9
+  C:0317H         LINE#         10
+  C:031DH         LINE#         11
   -------         ENDPROC       _LED_8SEG_DELAY
   -------         PROC          _LED_8SEG_DISPLAY
   D:0013H         SYMBOL        disStr
@@ -212,40 +211,40 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Segment_Displays (8SEG_CC_74XX138_MAIN)
   D:0017H         SYMBOL        i
   D:0018H         SYMBOL        disCode
   -------         ENDDO         
-  C:0126H         LINE#         19
-  C:012EH         LINE#         20
-  C:012EH         LINE#         23
+  C:0126H         LINE#         17
+  C:012EH         LINE#         18
+  C:012EH         LINE#         21
+  C:0131H         LINE#         22
   C:0131H         LINE#         24
-  C:0131H         LINE#         26
-  C:0136H         LINE#         29
-  C:0151H         LINE#         30
-  C:0151H         LINE#         31
-  C:0155H         LINE#         32
-  C:0157H         LINE#         33
-  C:0172H         LINE#         34
-  C:0172H         LINE#         35
-  C:0176H         LINE#         36
-  C:0178H         LINE#         38
-  C:0178H         LINE#         39
-  C:017FH         LINE#         40
-  C:017FH         LINE#         41
-  C:01A1H         LINE#         43
-  C:01A6H         LINE#         46
-  C:01ABH         LINE#         47
-  C:01B7H         LINE#         48
+  C:0136H         LINE#         27
+  C:0151H         LINE#         28
+  C:0151H         LINE#         29
+  C:0155H         LINE#         30
+  C:0157H         LINE#         31
+  C:0172H         LINE#         32
+  C:0172H         LINE#         33
+  C:0176H         LINE#         34
+  C:0178H         LINE#         36
+  C:0178H         LINE#         37
+  C:017FH         LINE#         38
+  C:017FH         LINE#         39
+  C:01A1H         LINE#         41
+  C:01A6H         LINE#         44
+  C:01ABH         LINE#         45
+  C:01B7H         LINE#         46
   -------         ENDPROC       _LED_8SEG_DISPLAY
   -------         ENDMOD        8SEG_CC_74XX138
 
   -------         MODULE        ?C?COPY
   C:00D3H         PUBLIC        ?C?COPY
   -------         ENDMOD        ?C?COPY
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/27/2020  23:36:12  PAGE 5
 
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:08:33  PAGE 5
 
 
   -------         MODULE        ?C?CLDOPTR
   C:00F9H         PUBLIC        ?C?CLDOPTR
   -------         ENDMOD        ?C?CLDOPTR
 
-Program Size: data=26.0 xdata=0 code=806
+Program Size: data=26.0 xdata=0 code=798
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

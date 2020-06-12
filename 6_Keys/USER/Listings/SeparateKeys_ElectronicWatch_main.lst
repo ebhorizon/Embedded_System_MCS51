@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/10/2020 21:38:40 PAGE 1   
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SEPARATEKEYS_ELECTRONICWATCH_MAIN
@@ -13,294 +13,301 @@ line level    source
    2          #include "74xx138.h"
    3          
    4          // 定义常用类型
-   5          typedef unsigned char u8;                       // 0 ~ 255
-   6          typedef unsigned int  u16;                      // 0 ~ 65535
-   7          typedef unsigned long u32;                      // 0 ~ 4294967295
-   8          
-   9          #define SEG_SEL P0                                      // 段选引脚
-  10          sbit LED = P1^0;                                        // LED使用引脚
-  11          sbit K1  = P3^0;                                        // 设置时间的按键
-  12          sbit K2  = P3^1;                                        // 分钟 + 1
-  13          sbit K3  = P3^2;                                        // 小时 + 1
-  14          sbit K4  = P3^3;                                        // 设置LED（闹铃）的按键
-  15          
-  16          // 共阴数码管段选，从0到9
-  17          u8 code segCC_SegSel[10] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f};
-  18          // 数码管显示数据，初始化00-00-00
-  19          u8 DisplayCode[8]        = {0x3f, 0x3f, 0x40, 0x3f, 0x3f, 0x40, 0x3f, 0x3f};
-  20          
-  21          u32 timestamp      = 0;                         // 存储显示时间戳的变量
-  22          /* 原本可以使用u16类型来定义闹钟时间戳，这样节省内存
-  23             但是考虑到DisplayCode_Update()的修改繁琐，故不优化此处 */
-  24          u32 alarmTimestamp = 43200;                     // 存储闹铃时间戳的变量，为防止一开始闹钟，设置为12-00-00
-  25          /* 数组全初始化只需写一个元素即可 */
-  26          u8  KeyCur[4]      = {1};                       // 装载当前时刻按键状态值
-  27          u8  KeyPre[4]      = {1};                       // 装载之前时刻按键状态值
-  28          u8  KeyBuff[4]     = {0xFF};            // 装载按键状态缓冲的变量
-  29          u8  KeyEnable[4]   = {1, 0, 0, 1};      // 四个按键是否可按的状态变量
-  30          
-  31          // 延时1ms函数
-  32          void Delay1ms()
-  33          {
-  34   1          u8 i;
-  35   1              
-  36   1              for(i = 0; i < 125; i++);
-  37   1      }
-  38          
-  39          // 数码管显示函数
-  40          void SegDisplay()
-  41          {         
-  42   1              u8 i;
-  43   1              
-  44   1              for(i = 0; i < 8; i++)
-  45   1              {
-  46   2                      _74XX138_SetLow(i);                             // 数码管位选
-  47   2                      SEG_SEL = DisplayCode[i];               // 数码管段选
-  48   2                      Delay1ms();
-  49   2                      
-  50   2                      SEG_SEL = 0x00;                                 // 数码管消隐
-  51   2              }
-  52   1      }
-  53          
-C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/10/2020 21:38:40 PAGE 2   
+   5          #ifndef u8
+              #define u8 unsigned char
+              #endif
+   8          #ifndef u16
+              #define u16 unsigned int
+              #endif
+  11          #ifndef u32
+  12          #define u32 unsigned long
+  13          #endif
+  14          
+  15          #define SEG_SEL P0                                      // 段选引脚
+  16          sbit LED = P1^0;                                        // LED使用引脚
+  17          // 此处按键的代码由于借给闹钟暂停了，所以没有写出去用key.h调用
+  18          sbit K1  = P3^0;                                        // 设置时间的按键
+  19          sbit K2  = P3^1;                                        // 分钟 + 1
+  20          sbit K3  = P3^2;                                        // 小时 + 1
+  21          sbit K4  = P3^3;                                        // 设置LED（闹铃）的按键
+  22          
+  23          // 共阴数码管段选，从0到9
+  24          u8 code segCC_SegSel[10] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f};
+  25          // 数码管显示数据，初始化00-00-00
+  26          u8 DisplayCode[8]        = {0x3f, 0x3f, 0x40, 0x3f, 0x3f, 0x40, 0x3f, 0x3f};
+  27          
+  28          u32 timestamp      = 0;                         // 存储显示时间戳的变量
+  29          /* 原本可以使用u16类型来定义闹钟时间戳，这样节省内存
+  30             但是考虑到DisplayCode_Update()的修改繁琐，故不优化此处 */
+  31          u32 alarmTimestamp = 43200;                     // 存储闹铃时间戳的变量，为防止一开始闹钟，设置为12-00-00
+  32          /* 数组全初始化只需写一个元素即可 */
+  33          u8  KeyCur[4]      = {1};                       // 装载当前时刻按键状态值
+  34          u8  KeyPre[4]      = {1};                       // 装载之前时刻按键状态值
+  35          u8  KeyBuff[4]     = {0xFF};            // 装载按键状态缓冲的变量
+  36          u8  KeyEnable[4]   = {1, 0, 0, 1};      // 四个按键是否可按的状态变量
+  37          
+  38          // 延时1ms函数
+  39          void Delay1ms()
+  40          {
+  41   1          u8 i;
+  42   1              
+  43   1              for(i = 0; i < 125; i++);
+  44   1      }
+  45          
+  46          // 数码管显示函数
+  47          void SegDisplay()
+  48          {         
+  49   1              u8 i;
+  50   1              
+  51   1              for(i = 0; i < 8; i++)
+  52   1              {
+  53   2                      _74XX138_SetLow(i);                             // 数码管位选
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 2   
 
-  54          // 显示时间更新
-  55          void DisplayCode_Update(u32 disTimestamp)
-  56          {
-  57   1              u8 disHour   = disTimestamp / 60 / 60;          // 小时00 ~ 23（24 == 00）
-  58   1              u8 disMinute = disTimestamp / 60 % 60;          // 分钟00 ~ 59（60 == 00）
-  59   1              u8 disSecond = disTimestamp % 60;                       // 秒  00 ~ 59（60 == 00）
-  60   1              
-  61   1              DisplayCode[0] = segCC_SegSel[disHour   / 10];
-  62   1              DisplayCode[1] = segCC_SegSel[disHour   % 10];
-  63   1              DisplayCode[3] = segCC_SegSel[disMinute / 10];
-  64   1              DisplayCode[4] = segCC_SegSel[disMinute % 10];
-  65   1              DisplayCode[6] = segCC_SegSel[disSecond / 10];
-  66   1              DisplayCode[7] = segCC_SegSel[disSecond % 10];
-  67   1      }
-  68          
-  69          // 扫描哪个按键按下了
-  70          u8 KeyScan()
-  71          {
-  72   1              u8 i, keyVal = 0;
-  73   1              
-  74   1              for(i = 0; i < 4; i++)                          // 四个按键的扫描
-  75   1              {
-  76   2                      if(KeyCur[i] != KeyPre[i])              // 当前按键点位值和之前时刻点位值发生变化
-  77   2                      {
-  78   3                              if(KeyPre[i])                           // 之前时刻的点位值为高
-  79   3                              {
-  80   4                                      keyVal = i + 1;
-  81   4                              }
-  82   3                              KeyPre[i] = KeyCur[i];          // 之前时刻的点位值更新
-  83   3                      }
-  84   2              }
-  85   1              
-  86   1              return(keyVal);
-  87   1      }
-  88          
-  89          // 按键检测，4次扫描状态一样才是置位
-  90          void KeyUpdate()
-  91          {
-  92   1              u8 i;
-  93   1              
-  94   1              // 把KEYS的值装载到KeyBuff的最后一位
-  95   1              KeyBuff[0] = (KeyBuff[0] << 1) | K1;
-  96   1              KeyBuff[1] = (KeyBuff[1] << 1) | K2;
-  97   1              KeyBuff[2] = (KeyBuff[2] << 1) | K3;
-  98   1              KeyBuff[3] = (KeyBuff[3] << 1) | K4;
-  99   1              
- 100   1              for(i = 0; i < 4; i++)
- 101   1              {
- 102   2                      if((KeyBuff[i] & 0x0F) == 0x00)                 // 表明连续抽检到4个0
- 103   2                      {
- 104   3                              KeyCur[i] = 0;
- 105   3                      }
- 106   2                      else if((KeyBuff[i] & 0x0F) == 0x0F)    // 表明连续抽检到4个1
- 107   2                      {
- 108   3                              KeyCur[i] = 1;
- 109   3                      }
- 110   2              }
- 111   1      }
- 112          
- 113          void KeyAction(u8 keyVal)
- 114          {
- 115   1              switch(keyVal)
-C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/10/2020 21:38:40 PAGE 3   
+  54   2                      SEG_SEL = DisplayCode[i];               // 数码管段选
+  55   2                      Delay1ms();
+  56   2                      
+  57   2                      SEG_SEL = 0x00;                                 // 数码管消隐
+  58   2              }
+  59   1      }
+  60          
+  61          // 显示时间更新
+  62          void DisplayCode_Update(u32 disTimestamp)
+  63          {
+  64   1              u8 disHour   = disTimestamp / 60 / 60;          // 小时00 ~ 23（24 == 00）
+  65   1              u8 disMinute = disTimestamp / 60 % 60;          // 分钟00 ~ 59（60 == 00）
+  66   1              u8 disSecond = disTimestamp % 60;                       // 秒  00 ~ 59（60 == 00）
+  67   1              
+  68   1              DisplayCode[0] = segCC_SegSel[disHour   / 10];
+  69   1              DisplayCode[1] = segCC_SegSel[disHour   % 10];
+  70   1              DisplayCode[3] = segCC_SegSel[disMinute / 10];
+  71   1              DisplayCode[4] = segCC_SegSel[disMinute % 10];
+  72   1              DisplayCode[6] = segCC_SegSel[disSecond / 10];
+  73   1              DisplayCode[7] = segCC_SegSel[disSecond % 10];
+  74   1      }
+  75          
+  76          // 扫描哪个按键按下了
+  77          u8 KeyScan()
+  78          {
+  79   1              u8 i, keyVal = 0;
+  80   1              
+  81   1              for(i = 0; i < 4; i++)                          // 四个按键的扫描
+  82   1              {
+  83   2                      if(KeyCur[i] != KeyPre[i])              // 当前按键点位值和之前时刻点位值发生变化
+  84   2                      {
+  85   3                              if(KeyPre[i])                           // 之前时刻的点位值为高
+  86   3                              {
+  87   4                                      keyVal = i + 1;
+  88   4                              }
+  89   3                              KeyPre[i] = KeyCur[i];          // 之前时刻的点位值更新
+  90   3                      }
+  91   2              }
+  92   1              
+  93   1              return(keyVal);
+  94   1      }
+  95          
+  96          // 按键检测，4次扫描状态一样才是置位
+  97          void KeyUpdate()
+  98          {
+  99   1              u8 i;
+ 100   1              
+ 101   1              // 把KEYS的值装载到KeyBuff的最后一位
+ 102   1              KeyBuff[0] = (KeyBuff[0] << 1) | K1;
+ 103   1              KeyBuff[1] = (KeyBuff[1] << 1) | K2;
+ 104   1              KeyBuff[2] = (KeyBuff[2] << 1) | K3;
+ 105   1              KeyBuff[3] = (KeyBuff[3] << 1) | K4;
+ 106   1              
+ 107   1              for(i = 0; i < 4; i++)
+ 108   1              {
+ 109   2                      if((KeyBuff[i] & 0x0F) == 0x00)                 // 表明连续抽检到4个0
+ 110   2                      {
+ 111   3                              KeyCur[i] = 0;
+ 112   3                      }
+ 113   2                      else if((KeyBuff[i] & 0x0F) == 0x0F)    // 表明连续抽检到4个1
+ 114   2                      {
+ 115   3                              KeyCur[i] = 1;
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 3   
 
- 116   1              {
- 117   2                      case 1:
- 118   2                              if(KeyEnable[0])        // 若这个键能按下
- 119   2                              {
- 120   3                                      // 打开或关闭定时
- 121   3                                      TR0 = !TR0;
- 122   3                                      if(!TR0)        // 定时器被关闭了——可以调整时间了，不可以设置闹铃了
- 123   3                                      {
- 124   4                                              KeyEnable[1] = 1;
- 125   4                                              KeyEnable[2] = 1;
- 126   4                                              KeyEnable[3] = 0;
- 127   4                                      }
- 128   3                                      else            // 定时器被打开了——不可以调整时间了，可以设置闹铃了
- 129   3                                      {
- 130   4                                              KeyEnable[1] = 0;
- 131   4                                              KeyEnable[2] = 0;
- 132   4                                              KeyEnable[3] = 1;
- 133   4                                      }
- 134   3                              }
- 135   2                              break;
- 136   2                      case 2:
- 137   2                              if(KeyEnable[1])        // 若这个键能按下
- 138   2                              {
- 139   3                                      // 判断是时间调整还是闹铃设置
- 140   3                                      if(KeyEnable[0])        // 时间调整
- 141   3                                      {
- 142   4                                              timestamp += 60;
- 143   4                                              if(timestamp == 86400) timestamp = 0;
- 144   4                                      }
- 145   3                                      else                            // 闹铃设置
- 146   3                                      {
- 147   4                                              alarmTimestamp += 60;
- 148   4                                              if(alarmTimestamp == 86400) alarmTimestamp = 0;
- 149   4                                      }
- 150   3                              }
- 151   2                              break;
- 152   2                      case 3:
- 153   2                              if(KeyEnable[2])        // 若这个键能按下
- 154   2                              {
- 155   3                                      // 判断是时间调整还是闹铃设置
- 156   3                                      if(KeyEnable[0])        // 时间调整
- 157   3                                      {
- 158   4                                              timestamp += 3600;
- 159   4                                              if(timestamp >= 86400) timestamp = 0;
- 160   4                                      }
- 161   3                                      else                            // 闹铃设置
- 162   3                                      {
- 163   4                                              alarmTimestamp += 3600;
- 164   4                                              if(alarmTimestamp >= 86400) alarmTimestamp = 0;
- 165   4                                      }
- 166   3                              }
- 167   2                              break;
- 168   2                      case 4:
- 169   2                              if(KeyEnable[3])        // 若这个键能按下
- 170   2                              {
- 171   3                                      KeyEnable[0] = !KeyEnable[0];   // 以时间是否可以设置为闹铃是否可以设置的标准
- 172   3                                      if(!KeyEnable[0])                               // 时间不可调整，闹铃设置开始
- 173   3                                      {
- 174   4                                              KeyEnable[1] = 1;
- 175   4                                              KeyEnable[2] = 1;
- 176   4                                      }
- 177   3                                      else                                                    // 时间可以调整，闹铃设置结束
-C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/10/2020 21:38:40 PAGE 4   
+ 116   3                      }
+ 117   2              }
+ 118   1      }
+ 119          
+ 120          void KeyAction(u8 keyVal)
+ 121          {
+ 122   1              switch(keyVal)
+ 123   1              {
+ 124   2                      case 1:
+ 125   2                              if(KeyEnable[0])        // 若这个键能按下
+ 126   2                              {
+ 127   3                                      // 打开或关闭定时
+ 128   3                                      TR0 = !TR0;
+ 129   3                                      if(!TR0)        // 定时器被关闭了——可以调整时间了，不可以设置闹铃了
+ 130   3                                      {
+ 131   4                                              KeyEnable[1] = 1;
+ 132   4                                              KeyEnable[2] = 1;
+ 133   4                                              KeyEnable[3] = 0;
+ 134   4                                      }
+ 135   3                                      else            // 定时器被打开了——不可以调整时间了，可以设置闹铃了
+ 136   3                                      {
+ 137   4                                              KeyEnable[1] = 0;
+ 138   4                                              KeyEnable[2] = 0;
+ 139   4                                              KeyEnable[3] = 1;
+ 140   4                                      }
+ 141   3                              }
+ 142   2                              break;
+ 143   2                      case 2:
+ 144   2                              if(KeyEnable[1])        // 若这个键能按下
+ 145   2                              {
+ 146   3                                      // 判断是时间调整还是闹铃设置
+ 147   3                                      if(KeyEnable[0])        // 时间调整
+ 148   3                                      {
+ 149   4                                              timestamp += 60;
+ 150   4                                              if(timestamp == 86400) timestamp = 0;
+ 151   4                                      }
+ 152   3                                      else                            // 闹铃设置
+ 153   3                                      {
+ 154   4                                              alarmTimestamp += 60;
+ 155   4                                              if(alarmTimestamp == 86400) alarmTimestamp = 0;
+ 156   4                                      }
+ 157   3                              }
+ 158   2                              break;
+ 159   2                      case 3:
+ 160   2                              if(KeyEnable[2])        // 若这个键能按下
+ 161   2                              {
+ 162   3                                      // 判断是时间调整还是闹铃设置
+ 163   3                                      if(KeyEnable[0])        // 时间调整
+ 164   3                                      {
+ 165   4                                              timestamp += 3600;
+ 166   4                                              if(timestamp >= 86400) timestamp = 0;
+ 167   4                                      }
+ 168   3                                      else                            // 闹铃设置
+ 169   3                                      {
+ 170   4                                              alarmTimestamp += 3600;
+ 171   4                                              if(alarmTimestamp >= 86400) alarmTimestamp = 0;
+ 172   4                                      }
+ 173   3                              }
+ 174   2                              break;
+ 175   2                      case 4:
+ 176   2                              if(KeyEnable[3])        // 若这个键能按下
+ 177   2                              {
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 4   
 
- 178   3                                      {
- 179   4                                              KeyEnable[1] = 0;
- 180   4                                              KeyEnable[2] = 0;
- 181   4                                      }
- 182   3                              }
- 183   2                              break;
- 184   2                      default: break;
- 185   2              }
- 186   1      }
- 187          
- 188          // 真正的时间所用定时器
- 189          void Timer0Init()
- 190          {
- 191   1              /* 定时器0，工作方式1，或运算防止移植的时候影响其他定时器
- 192   1                 方式1：16位加1计数器 */
- 193   1              TMOD |= 0x01;
- 194   1              
- 195   1              TR0 = 1;        // 打开定时器0
- 196   1              
- 197   1              // 计时50ms
- 198   1              TH0 = 15536 / 256;
- 199   1              TL0 = 15536 % 256;
- 200   1              
- 201   1              // 定时器0中断和总中断开关打开
- 202   1              ET0 = 1;
- 203   1              EA  = 1;
- 204   1      }
- 205          
- 206          // 按键所用的定时器
- 207          void Timer1Init()
- 208          {
- 209   1              /* 定时器1，工作方式1，或运算防止移植的时候影响其他定时器
- 210   1                 方式1：16位加1计数器 */
- 211   1              TMOD |= 0x10;
- 212   1              
- 213   1              TR1 = 1;        // 打开定时器1
- 214   1              
- 215   1              // 计时4ms
- 216   1              TH1 = 61536 / 256;
- 217   1              TL1 = 61536 % 256;
- 218   1              
- 219   1              // 定时器0中断和总中断开关打开
- 220   1              ET1 = 1;
- 221   1              // EA  = 1;     // 总中断已打开
- 222   1      }
- 223          
- 224          void main()
- 225          {
- 226   1              u8 keyVal;
- 227   1              
- 228   1              Timer0Init();           // 时间所用定时器，中断优先级比较大
- 229   1              Timer1Init();           // 按键所用定时器，中断优先级比较小
- 230   1              LED = 1;                        // 初始化闹钟状态为关闭状态
- 231   1              
- 232   1              while(1)
- 233   1              {
- 234   2                      // 按键扫描程序
- 235   2                      keyVal = KeyScan();
- 236   2                      KeyAction(keyVal);
- 237   2                      
- 238   2                      // 闹钟你可以响了
- 239   2                      if(timestamp == alarmTimestamp)  LED = 0;
-C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/10/2020 21:38:40 PAGE 5   
+ 178   3                                      KeyEnable[0] = !KeyEnable[0];   // 以时间是否可以设置为闹铃是否可以设置的标准
+ 179   3                                      if(!KeyEnable[0])                               // 时间不可调整，闹铃设置开始
+ 180   3                                      {
+ 181   4                                              KeyEnable[1] = 1;
+ 182   4                                              KeyEnable[2] = 1;
+ 183   4                                      }
+ 184   3                                      else                                                    // 时间可以调整，闹铃设置结束
+ 185   3                                      {
+ 186   4                                              KeyEnable[1] = 0;
+ 187   4                                              KeyEnable[2] = 0;
+ 188   4                                      }
+ 189   3                              }
+ 190   2                              break;
+ 191   2                      default: break;
+ 192   2              }
+ 193   1      }
+ 194          
+ 195          // 真正的时间所用定时器
+ 196          void Timer0Init()
+ 197          {
+ 198   1              /* 定时器0，工作方式1，或运算防止移植的时候影响其他定时器
+ 199   1                 方式1：16位加1计数器 */
+ 200   1              TMOD |= 0x01;
+ 201   1              
+ 202   1              TR0 = 1;        // 打开定时器0
+ 203   1              
+ 204   1              // 计时50ms
+ 205   1              TH0 = 15536 / 256;
+ 206   1              TL0 = 15536 % 256;
+ 207   1              
+ 208   1              // 定时器0中断和总中断开关打开
+ 209   1              ET0 = 1;
+ 210   1              EA  = 1;
+ 211   1      }
+ 212          
+ 213          // 按键所用的定时器
+ 214          void Timer1Init()
+ 215          {
+ 216   1              /* 定时器1，工作方式1，或运算防止移植的时候影响其他定时器
+ 217   1                 方式1：16位加1计数器 */
+ 218   1              TMOD |= 0x10;
+ 219   1              
+ 220   1              TR1 = 1;        // 打开定时器1
+ 221   1              
+ 222   1              // 计时4ms
+ 223   1              TH1 = 61536 / 256;
+ 224   1              TL1 = 61536 % 256;
+ 225   1              
+ 226   1              // 定时器0中断和总中断开关打开
+ 227   1              ET1 = 1;
+ 228   1              // EA  = 1;     // 总中断已打开
+ 229   1      }
+ 230          
+ 231          void main()
+ 232          {
+ 233   1              u8 keyVal;
+ 234   1              
+ 235   1              Timer0Init();           // 时间所用定时器，中断优先级比较大
+ 236   1              Timer1Init();           // 按键所用定时器，中断优先级比较小
+ 237   1              LED = 1;                        // 初始化闹钟状态为关闭状态
+ 238   1              
+ 239   1              while(1)
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 5   
 
- 240   2                      
- 241   2                      /* 闹铃设置状态打开的时候有个特点：
- 242   2                 就是闹铃设置按钮可以按下，并且时间自增按钮（判断任意一个即可）可以按下 */
- 243   2                      if(KeyEnable[3] && KeyEnable[1]) DisplayCode_Update(alarmTimestamp);
- 244   2                      else                                                 DisplayCode_Update(timestamp);
- 245   2                      SegDisplay();   // 数码管开始显示最新更新的显示数据
- 246   2          }
- 247   1      }
- 248          
- 249          void Timer0_50ms() interrupt 1
- 250          {
- 251   1              static u8 tCount = 0;                   // 显示时间时所用计数
- 252   1              
- 253   1              // 定时器0高低位的赋值
- 254   1              TH0 = 15536 / 256;
- 255   1              TL0 = 15536 % 256;
- 256   1              
- 257   1              if(++tCount == 20)                              // 1s需要记录20个50ms
- 258   1              {
- 259   2                      // 累加并判断，时间为24-00-00 = 86400时清零
- 260   2                      if(++timestamp >= 86400) timestamp = 0;
- 261   2                      tCount = 0;                                     // 将静态变量归0
- 262   2              }
- 263   1      }
- 264          
- 265          void Timer1_4ms() interrupt 3
- 266          {
- 267   1              static u16 LED_tCount = 0;              // 关闭LED时所用计数
- 268   1              
- 269   1              // 重装载——4ms
- 270   1              TH1 = 61536 / 256;
- 271   1              TL1 = 61536 % 256;
- 272   1              
- 273   1              // 闹钟的关闭不大好使用T0因为设置时间的时候T0暂停了
- 274   1              if(!LED)                                                // 如果闹钟打开，10s后关闭闹钟
- 275   1              {
- 276   2                      if(++LED_tCount == 2500)        // 10s需要记录2500个4ms
- 277   2                      {
- 278   3                              LED = 1;
- 279   3                              LED_tCount = 0;                 // 将静态变量归0
- 280   3                      }
- 281   2              }
- 282   1              
- 283   1              KeyUpdate();                                    // 检测按键状态
- 284   1      }
+ 240   1              {
+ 241   2                      // 按键扫描程序
+ 242   2                      keyVal = KeyScan();
+ 243   2                      KeyAction(keyVal);
+ 244   2                      
+ 245   2                      // 闹钟你可以响了
+ 246   2                      if(timestamp == alarmTimestamp)  LED = 0;
+ 247   2                      
+ 248   2                      /* 闹铃设置状态打开的时候有个特点：
+ 249   2                 就是闹铃设置按钮可以按下，并且时间自增按钮（判断任意一个即可）可以按下 */
+ 250   2                      if(KeyEnable[3] && KeyEnable[1]) DisplayCode_Update(alarmTimestamp);
+ 251   2                      else                                                 DisplayCode_Update(timestamp);
+ 252   2                      SegDisplay();   // 数码管开始显示最新更新的显示数据
+ 253   2          }
+ 254   1      }
+ 255          
+ 256          void Timer0_50ms() interrupt 1
+ 257          {
+ 258   1              static u8 tCount = 0;                   // 显示时间时所用计数
+ 259   1              
+ 260   1              // 定时器0高低位的赋值
+ 261   1              TH0 = 15536 / 256;
+ 262   1              TL0 = 15536 % 256;
+ 263   1              
+ 264   1              if(++tCount == 20)                              // 1s需要记录20个50ms
+ 265   1              {
+ 266   2                      // 累加并判断，时间为24-00-00 = 86400时清零
+ 267   2                      if(++timestamp >= 86400) timestamp = 0;
+ 268   2                      tCount = 0;                                     // 将静态变量归0
+ 269   2              }
+ 270   1      }
+ 271          
+ 272          void Timer1_4ms() interrupt 3
+ 273          {
+ 274   1              static u16 LED_tCount = 0;              // 关闭LED时所用计数
+ 275   1              
+ 276   1              // 重装载——4ms
+ 277   1              TH1 = 61536 / 256;
+ 278   1              TL1 = 61536 % 256;
+ 279   1              
+ 280   1              // 闹钟的关闭不大好使用T0因为设置时间的时候T0暂停了
+ 281   1              if(!LED)                                                // 如果闹钟打开，10s后关闭闹钟
+ 282   1              {
+ 283   2                      if(++LED_tCount == 2500)        // 10s需要记录2500个4ms
+ 284   2                      {
+ 285   3                              LED = 1;
+ 286   3                              LED_tCount = 0;                 // 将静态变量归0
+ 287   3                      }
+ 288   2              }
+ 289   1              
+ 290   1              KeyUpdate();                                    // 检测按键状态
+ 291   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -311,6 +318,8 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =     35       7
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
+C51 COMPILER V9.57.0.0   SEPARATEKEYS_ELECTRONICWATCH_MAIN                                 06/12/2020 14:10:17 PAGE 6   
+
 END OF MODULE INFORMATION.
 
 

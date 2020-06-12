@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 11:49:25 PAGE 1   
+C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 14:11:13 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE BUZZER_MAIN
@@ -62,7 +62,7 @@ line level    source
   52          //      250, 250, 250, 125, 625, 250, 250,
   53          //      250, 250, 250, 250, 1000,
   54          //      125, 125, 125, 125, 125, 125, 125, 125, 500, 125, 125, 250,
-C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 11:49:25 PAGE 2   
+C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 14:11:13 PAGE 2   
 
   55          //      1000, 250, 250, 250, 250, 
   56          //      1000, 250, 250, 250, 250, 
@@ -126,7 +126,7 @@ line level    source
  114                  1000,
  115                  1000,
  116                  250, 250, 375, 125,
-C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 11:49:25 PAGE 3   
+C51 COMPILER V9.57.0.0   BUZZER_MAIN                                                       06/12/2020 14:11:13 PAGE 3   
 
  117                  250, 250, 375, 125,
  118                  250, 250, 250, 250,
@@ -159,12 +159,14 @@ line level    source
  145   1              Buzzer_Init();
  146   1              while(1)
  147   1              {       
- 148   2                      for(i = 0; i < sizeof(music_score) / sizeof(music_score[0]); i++)
- 149   2                      {
- 150   3                              Buzzer_Play(music_score[i] + 12, music_delay[i] / 3);
- 151   3                      }
- 152   2              }
- 153   1      }
+ 148   2                      /* music_scoreÊÇ¼òÆ×¶ÔÓ¦¸ÖÇÙÇÙ¼ü±àºÅ
+ 149   2                         music_delayÊÇÑÓ³ÙºÁÃëÊý */ 
+ 150   2                      for(i = 0; i < sizeof(music_score) / sizeof(music_score[0]); i++)
+ 151   2                      {
+ 152   3                              Buzzer_Play(music_score[i] + 12, music_delay[i] / 3);
+ 153   3                      }
+ 154   2              }
+ 155   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

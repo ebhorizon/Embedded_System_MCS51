@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/06/2020  18:47:42  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/12/2020  14:10:43  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -59,7 +59,7 @@ SEGMENT                                  DATA_GROUP
 
 
 SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Lattice (LED_LATTICE_MAIN)
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/06/2020  18:47:42  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:10:43  PAGE 2
 
 
 
@@ -83,10 +83,10 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Lattice (LED_LATTICE_MAIN)
   D:00D0H         PUBLIC        PSW
   -------         PROC          _DELAY
   D:0006H         SYMBOL        i
-  C:01D6H         LINE#         15
-  C:01D6H         LINE#         16
-  C:01D6H         LINE#         17
-  C:01E0H         LINE#         18
+  C:01D6H         LINE#         19
+  C:01D6H         LINE#         20
+  C:01D6H         LINE#         21
+  C:01E0H         LINE#         22
   -------         ENDPROC       _DELAY
   -------         PROC          MAIN
   -------         DO            
@@ -95,43 +95,43 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Lattice (LED_LATTICE_MAIN)
   D:000AH         SYMBOL        stop
   D:000CH         SYMBOL        temp
   -------         ENDDO         
-  C:0003H         LINE#         20
-  C:0003H         LINE#         21
-  C:0003H         LINE#         28
-  C:0003H         LINE#         29
-  C:0003H         LINE#         31
-  C:0006H         LINE#         32
-  C:0006H         LINE#         33
-  C:0009H         LINE#         34
-  C:0009H         LINE#         36
-  C:0018H         LINE#         37
-  C:0028H         LINE#         38
-  C:0033H         LINE#         39
-  C:003AH         LINE#         40
-  C:0043H         LINE#         41
-  C:004CH         LINE#         44
-  C:0052H         LINE#         45
-  C:0052H         LINE#         46
-  C:0055H         LINE#         47
-  C:0055H         LINE#         48
-  C:005EH         LINE#         49
-  C:0066H         LINE#         50
-  C:0071H         LINE#         51
-  C:0078H         LINE#         52
-  C:0081H         LINE#         53
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/06/2020  18:47:42  PAGE 3
+  C:0003H         LINE#         24
+  C:0003H         LINE#         25
+  C:0003H         LINE#         32
+  C:0003H         LINE#         33
+  C:0003H         LINE#         35
+  C:0006H         LINE#         36
+  C:0006H         LINE#         37
+  C:0009H         LINE#         38
+  C:0009H         LINE#         40
+  C:0018H         LINE#         41
+  C:0028H         LINE#         42
+  C:0033H         LINE#         43
+  C:003AH         LINE#         44
+  C:0043H         LINE#         45
+  C:004CH         LINE#         48
+  C:0052H         LINE#         49
+  C:0052H         LINE#         50
+  C:0055H         LINE#         51
+  C:0055H         LINE#         52
+  C:005EH         LINE#         53
+  C:0066H         LINE#         54
+  C:0071H         LINE#         55
+  C:0078H         LINE#         56
+  C:0081H         LINE#         57
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:10:43  PAGE 3
 
 
-  C:0094H         LINE#         56
-  C:00A8H         LINE#         57
-  C:00A8H         LINE#         58
-  C:00ABH         LINE#         59
-  C:00ABH         LINE#         60
-  C:00B4H         LINE#         61
-  C:00BCH         LINE#         62
-  C:00C7H         LINE#         63
-  C:00CEH         LINE#         64
-  C:00D7H         LINE#         65
+  C:0094H         LINE#         60
+  C:00A8H         LINE#         61
+  C:00A8H         LINE#         62
+  C:00ABH         LINE#         63
+  C:00ABH         LINE#         64
+  C:00B4H         LINE#         65
+  C:00BCH         LINE#         66
+  C:00C7H         LINE#         67
+  C:00CEH         LINE#         68
+  C:00D7H         LINE#         69
   -------         ENDPROC       MAIN
   -------         ENDMOD        LED_LATTICE_MAIN
 
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\LED_Lattice (LED_LATTICE_MAIN)
   -------         ENDPROC       __74XX595_SENDBYTE
   -------         ENDMOD        74XX595
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/06/2020  18:47:42  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:10:43  PAGE 4
 
 
   -------         MODULE        ?C?CLDPTR

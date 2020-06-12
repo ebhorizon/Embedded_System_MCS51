@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   LCD1602                                                           06/06/2020 21:36:55 PAGE 1   
+C51 COMPILER V9.57.0.0   LCD1602                                                           06/12/2020 14:10:59 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LCD1602
@@ -10,16 +10,16 @@ line level    source
 
    1          #include "lcd1602.h"
    2          
-   3          void LCD1602_Delay1ms(uint c)
+   3          void LCD1602_Delay1ms(u16 c)
    4          {
-   5   1              uchar a, b;
+   5   1              u8 a, b;
    6   1              for(; c > 0; c--)
    7   1                      for(b = 199; b > 0; b--)
    8   1                              for(a = 1; a > 0; a--);
    9   1      }
   10          
   11          // LCD1602写指令——8位数据线
-  12          void LCD1602_WriteCmd(uchar cmd)
+  12          void LCD1602_WriteCmd(u8 cmd)
   13          {
   14   1              LCD1602_E  = 0;
   15   1              LCD1602_RS = 0;
@@ -34,7 +34,7 @@ line level    source
   24   1      }
   25          
   26          // LCD1602写数据——8位数据线
-  27          void LCD1602_WriteDat(uchar dat)
+  27          void LCD1602_WriteDat(u8 dat)
   28          {
   29   1              LCD1602_E  = 0;
   30   1              // 写入数据至CGRAM或DDRAM
@@ -50,7 +50,7 @@ line level    source
   40   1      }
   41          
   42          // 设置为第一行还是第二行，1为第一行，2为第二行
-  43          void LCD1602_SetLine(uchar line)
+  43          void LCD1602_SetLine(u8 line)
   44          {
   45   1              // 光标起始地址要加上80H
   46   1              if(line == 1) LCD1602_WriteCmd(0x80);   // 00H + 80H
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1              /* LCD1602功能设置——001(DL) NFXX
   54   1             DL：表示在高电平时为8位总线，低电平时为4位总线（低四位不用）
-C51 COMPILER V9.57.0.0   LCD1602                                                           06/06/2020 21:36:55 PAGE 2   
+C51 COMPILER V9.57.0.0   LCD1602                                                           06/12/2020 14:10:59 PAGE 2   
 
   55   1             N： 表示在低电平时为单行显示，高电平时双行显示
   56   1             F： 表示在低电平时显示5 × 7点阵每字符，高电平时显示5 × 10点阵每字符 */ 

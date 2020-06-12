@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   8SEG_CC_74XX138_MAIN                                              05/27/2020 23:35:45 PAGE 1   
+C51 COMPILER V9.57.0.0   8SEG_CC_74XX138_MAIN                                              06/12/2020 14:08:32 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 8SEG_CC_74XX138_MAIN
@@ -13,63 +13,68 @@ line level    source
    3          #include <reg52.h>
    4          #include "8seg_CC_74xx138.h"
    5          
-   6          typedef unsigned char u8;       // 0 ~ 255
-   7          typedef unsigned int  u16;      // 0 ~ 65535
-   8          
-   9          // 显示一位最低位，0 ~ F，小数点闪烁
-  10          void Dis1Bit()
-  11          {
-  12   1              u8 i, disCode[8] = "        ";
-  13   1              u16 t;
-  14   1              
-  15   1              for(i = 0; i < 16; i++)
-  16   1              {
-  17   2                      if(i >= 0 && i <= 9) disCode[7] = '0' + i;
-  18   2                      else                             disCode[7] = 'A' + i - 10;
-  19   2                      
-  20   2                      // 这个for循环用来延时
-  21   2                      for(t = 200; t > 0; t--)
-  22   2                      {
-  23   3                              LED_8Seg_Display(disCode, !(i % 2 == 0));
-  24   3                      }
-  25   2              }
-  26   1      }
-  27          
-  28          // 显示全部位，0 ~ F，小数点闪烁
-  29          void Dis8Bit()
-  30          {
-  31   1              u8 i, disCode[8];
-  32   1              u16 t;
-  33   1              
-  34   1              for(i = 0; i < 16; i++)
-  35   1              {
-  36   2                      if(i >= 0 && i <= 9)
-  37   2                      {
-  38   3                              for(t = 0; t < 8; t++) disCode[t] = '0' + i;
-  39   3                      }
-  40   2                      else
-  41   2                      {
-  42   3                              for(t = 0; t < 8; t++) disCode[t] = 'A' + i - 10;
-  43   3                      }       
-  44   2                      
-  45   2                      // 这个for循环用来延时
-  46   2                      for(t = 200; t > 0; t--)
-  47   2                      {
-  48   3                              LED_8Seg_Display(disCode, (i % 2 == 0 ? 0x00 : 0xFF));
-  49   3                      }
-  50   2              }
-  51   1      }
-  52          
-  53          void main()
-  54          {
-C51 COMPILER V9.57.0.0   8SEG_CC_74XX138_MAIN                                              05/27/2020 23:35:45 PAGE 2   
+   6          // 定义常用类型
+   7          #ifndef u8
+              #define u8 unsigned char
+              #endif
+  10          #ifndef u16
+              #define u16  unsigned int
+              #endif
+  13          
+  14          // 显示一位最低位，0 ~ F，小数点闪烁
+  15          void Dis1Bit()
+  16          {
+  17   1              u8 i, disCode[8] = "        ";
+  18   1              u16 t;
+  19   1              
+  20   1              for(i = 0; i < 16; i++)
+  21   1              {
+  22   2                      if(i >= 0 && i <= 9) disCode[7] = '0' + i;
+  23   2                      else                             disCode[7] = 'A' + i - 10;
+  24   2                      
+  25   2                      // 这个for循环用来延时
+  26   2                      for(t = 200; t > 0; t--)
+  27   2                      {
+  28   3                              LED_8Seg_Display(disCode, !(i % 2 == 0));
+  29   3                      }
+  30   2              }
+  31   1      }
+  32          
+  33          // 显示全部位，0 ~ F，小数点闪烁
+  34          void Dis8Bit()
+  35          {
+  36   1              u8 i, disCode[8];
+  37   1              u16 t;
+  38   1              
+  39   1              for(i = 0; i < 16; i++)
+  40   1              {
+  41   2                      if(i >= 0 && i <= 9)
+  42   2                      {
+  43   3                              for(t = 0; t < 8; t++) disCode[t] = '0' + i;
+  44   3                      }
+  45   2                      else
+  46   2                      {
+  47   3                              for(t = 0; t < 8; t++) disCode[t] = 'A' + i - 10;
+  48   3                      }       
+  49   2                      
+  50   2                      // 这个for循环用来延时
+  51   2                      for(t = 200; t > 0; t--)
+  52   2                      {
+  53   3                              LED_8Seg_Display(disCode, (i % 2 == 0 ? 0x00 : 0xFF));
+  54   3                      }
+C51 COMPILER V9.57.0.0   8SEG_CC_74XX138_MAIN                                              06/12/2020 14:08:32 PAGE 2   
 
-  55   1              while(1)
-  56   1              {
-  57   2                      Dis1Bit();
-  58   2                      Dis8Bit();
-  59   2              }
-  60   1      }
+  55   2              }
+  56   1      }
+  57          
+  58          void main()
+  59          {
+  60   1              while(1)
+  61   1              {
+  62   2                      Dis1Bit();
+  63   2                      Dis8Bit();
+  64   2              }
+  65   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

@@ -11,7 +11,7 @@
 
 sbit Logic_Level = P2^7;	// 来判断逻辑电平的引脚
 
-void Delay(uint t)
+void Delay(u16 t)
 {
 	while(t--);
 }

@@ -10,7 +10,7 @@
 #define u16  unsigned int
 #endif
 
-void Delay(uint t)
+void Delay(u16 t)
 {
 	while(t--);
 }

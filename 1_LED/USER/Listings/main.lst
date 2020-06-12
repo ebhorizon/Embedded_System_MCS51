@@ -1,0 +1,49 @@
+C51 COMPILER V9.57.0.0   MAIN                                                              06/12/2020 14:06:36 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN ..\OBJ\main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\main.lst) OBJECT(..\OBJ\main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include "led.h"
+   3          
+   4          void main()
+   5          {
+   6   1              while(1)
+   7   1              {
+   8   2                      // LED0位操作点亮
+   9   2                      LED0_Light_Bit();
+  10   2                      // LED0字操作点亮
+  11   2                      LED0_Light_Word();
+  12   2                      // LED0闪烁
+  13   2                      LED0_Flash(5);
+  14   2                      // LED左移
+  15   2                      LED_ToLeft();
+  16   2                      // LED右移
+  17   2                      LED_ToRight();
+  18   2                      // LED循环左移
+  19   2                      LED_ROL(2);
+  20   2                      // LED循环右移
+  21   2                      LED_ROR(2);
+  22   2                      // PWM（脉宽调制）调节亮度
+  23   2                      LED_PWM(2);
+  24   2              }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

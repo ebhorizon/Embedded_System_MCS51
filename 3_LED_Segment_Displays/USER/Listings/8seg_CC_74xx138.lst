@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   8SEG_CC_74XX138                                                   05/27/2020 23:36:12 PAGE 1   
+C51 COMPILER V9.57.0.0   8SEG_CC_74XX138                                                   06/12/2020 14:08:33 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 8SEG_CC_74XX138
@@ -11,61 +11,59 @@ line level    source
    1          #include "8seg_CC_74xx138.h"
    2          
    3          // 共阴数码管的段选
-   4          uchar code SegSel_CC[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 
+   4          u8 code SegSel_CC[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 
    5                                                            0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 
    6                                                            0x39, 0x5E, 0x79, 0x71, 0x80, 0x00};
-   7          // 共阴数码管的位选                                               
-   8          uchar code SegBit[]    = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
-   9          
-  10          void LED_8Seg_Delay(uchar t)
-  11          {
-  12   1              while(t--);
-  13   1      }
-  14          
-  15          /* 这个函数定义的是8位的显示，传入的参数：
-  16             1. 是要显示的字符串，占8位，0~F以及不显示，字母全大写
-  17             2. 8要显示小数点的状态，转化为16进制，从高到低
-  18             P.S. 要显示其他字符需要修改上面段选的数组，然后补充下面if函数 */
-  19          void LED_8Seg_Display(uchar disStr[8], uchar dp)
-  20          {
-  21   1              uchar i, disCode;
-  22   1              
-  23   1              for(i = 0; i < 8; i++)
-  24   1              {
-  25   2                      // 位选
-  26   2                      _74XX138_SetLow(i);
-  27   2                      
-  28   2                      // 段选
-  29   2                      if(disStr[i] >= '0' && disStr[i] <= '9')
-  30   2                      {
-  31   3                              disCode = SegSel_CC[disStr[i] - '0'];
-  32   3                      }
-  33   2                      else if(disStr[i] >= 'A' && disStr[i] <= 'F')
-  34   2                      {
-  35   3                              disCode = SegSel_CC[disStr[i] - 'A' + 10];
-  36   3                      }
-  37   2                      else
-  38   2                      {
-  39   3                              disCode = SegSel_CC[17];
-  40   3                      }
-  41   2                      LED_SEG = disCode + ((dp >> (7 - i)) & 0x01) * SegSel_CC[16];
+   7          
+   8          void LED_8Seg_Delay(u8 t)
+   9          {
+  10   1              while(t--);
+  11   1      }
+  12          
+  13          /* 这个函数定义的是8位的显示，传入的参数：
+  14             1. 是要显示的字符串，占8位，0~F以及不显示，字母全大写
+  15             2. 8要显示小数点的状态，转化为16进制，从高到低
+  16             P.S. 要显示其他字符需要修改上面段选的数组，然后补充下面if函数 */
+  17          void LED_8Seg_Display(u8 disStr[8], u8 dp)
+  18          {
+  19   1              u8 i, disCode;
+  20   1              
+  21   1              for(i = 0; i < 8; i++)
+  22   1              {
+  23   2                      // 位选
+  24   2                      _74XX138_SetLow(i);
+  25   2                      
+  26   2                      // 段选
+  27   2                      if(disStr[i] >= '0' && disStr[i] <= '9')
+  28   2                      {
+  29   3                              disCode = SegSel_CC[disStr[i] - '0'];
+  30   3                      }
+  31   2                      else if(disStr[i] >= 'A' && disStr[i] <= 'F')
+  32   2                      {
+  33   3                              disCode = SegSel_CC[disStr[i] - 'A' + 10];
+  34   3                      }
+  35   2                      else
+  36   2                      {
+  37   3                              disCode = SegSel_CC[17];
+  38   3                      }
+  39   2                      LED_SEG = disCode + ((dp >> (7 - i)) & 0x01) * SegSel_CC[16];
+  40   2                      
+  41   2                      LED_8Seg_Delay(REFRESH);
   42   2                      
-  43   2                      LED_8Seg_Delay(REFRESH);
-  44   2                      
-  45   2                      // 消隐
-  46   2                      LED_SEG = SegSel_CC[17];
-  47   2              }
-  48   1      }
+  43   2                      // 消隐
+  44   2                      LED_SEG = SegSel_CC[17];
+  45   2              }
+  46   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    153    ----
-   CONSTANT SIZE    =     26    ----
+   CONSTANT SIZE    =     18    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.57.0.0   8SEG_CC_74XX138                                                   05/27/2020 23:36:12 PAGE 2   
-
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----       6
+C51 COMPILER V9.57.0.0   8SEG_CC_74XX138                                                   06/12/2020 14:08:33 PAGE 2   
+
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

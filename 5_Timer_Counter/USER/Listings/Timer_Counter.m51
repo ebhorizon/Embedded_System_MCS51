@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/29/2020  10:55:33  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/12/2020  14:09:56  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -59,7 +59,7 @@ SEGMENT                                            DATA_GROUP
   +--> ?PR?MAIN?TIMER_COUNTER_ELECTRONICWATC...
   +--> ?C_INITSEG
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/29/2020  10:55:33  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:56  PAGE 2
 
 
 ?PR?MAIN?TIMER_COUNTER_ELECTRONICWATC...         -----    -----
@@ -114,12 +114,12 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\Timer_Counter (TIMER_COUNTER_ELECTRONICWATCH_MAI
   D:0005H         SYMBOL        i
   D:0004H         SYMBOL        j
   -------         ENDDO         
-  C:02F6H         LINE#         23
-  C:02F6H         LINE#         24
-  C:02F6H         LINE#         26
-  C:02FFH         LINE#         27
-  C:0308H         LINE#         28
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/29/2020  10:55:33  PAGE 3
+  C:02F6H         LINE#         30
+  C:02F6H         LINE#         31
+  C:02F6H         LINE#         33
+  C:02FFH         LINE#         34
+  C:0308H         LINE#         35
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:56  PAGE 3
 
 
   -------         ENDPROC       _DELAY1MS
@@ -127,16 +127,16 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\Timer_Counter (TIMER_COUNTER_ELECTRONICWATCH_MAI
   -------         DO            
   D:0015H         SYMBOL        i
   -------         ENDDO         
-  C:02BEH         LINE#         30
-  C:02BEH         LINE#         31
-  C:02BEH         LINE#         34
-  C:02C1H         LINE#         35
-  C:02C1H         LINE#         36
-  C:02C6H         LINE#         37
-  C:02CEH         LINE#         38
-  C:02D5H         LINE#         41
-  C:02D8H         LINE#         42
-  C:02E1H         LINE#         43
+  C:02BEH         LINE#         37
+  C:02BEH         LINE#         38
+  C:02BEH         LINE#         41
+  C:02C1H         LINE#         42
+  C:02C1H         LINE#         43
+  C:02C6H         LINE#         44
+  C:02CEH         LINE#         45
+  C:02D5H         LINE#         48
+  C:02D8H         LINE#         49
+  C:02E1H         LINE#         50
   -------         ENDPROC       SEGDISPLAY
   -------         PROC          DISPLAYCODE_UPDATE
   -------         DO            
@@ -144,56 +144,56 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\Timer_Counter (TIMER_COUNTER_ELECTRONICWATCH_MAI
   D:0016H         SYMBOL        disMinute
   D:0007H         SYMBOL        disSecond
   -------         ENDDO         
-  C:0199H         LINE#         45
-  C:0199H         LINE#         46
-  C:0199H         LINE#         47
-  C:01B5H         LINE#         48
-  C:01D3H         LINE#         49
-  C:01E6H         LINE#         51
-  C:01F2H         LINE#         52
-  C:01FDH         LINE#         53
-  C:0206H         LINE#         54
-  C:0211H         LINE#         55
-  C:0219H         LINE#         56
-  C:0223H         LINE#         57
+  C:0199H         LINE#         52
+  C:0199H         LINE#         53
+  C:0199H         LINE#         54
+  C:01B5H         LINE#         55
+  C:01D3H         LINE#         56
+  C:01E6H         LINE#         58
+  C:01F2H         LINE#         59
+  C:01FDH         LINE#         60
+  C:0206H         LINE#         61
+  C:0211H         LINE#         62
+  C:0219H         LINE#         63
+  C:0223H         LINE#         64
   -------         ENDPROC       DISPLAYCODE_UPDATE
   -------         PROC          TIMER0INIT
-  C:0309H         LINE#         59
-  C:0309H         LINE#         60
-  C:0309H         LINE#         63
-  C:030CH         LINE#         66
-  C:030EH         LINE#         73
-  C:0311H         LINE#         74
-  C:0314H         LINE#         77
-  C:0316H         LINE#         78
-  C:0318H         LINE#         79
+  C:0309H         LINE#         66
+  C:0309H         LINE#         67
+  C:0309H         LINE#         70
+  C:030CH         LINE#         73
+  C:030EH         LINE#         80
+  C:0311H         LINE#         81
+  C:0314H         LINE#         84
+  C:0316H         LINE#         85
+  C:0318H         LINE#         86
   -------         ENDPROC       TIMER0INIT
   -------         PROC          MAIN
-  C:0319H         LINE#         81
-  C:0319H         LINE#         82
-  C:0319H         LINE#         83
-  C:031CH         LINE#         85
-  C:031CH         LINE#         86
-  C:031CH         LINE#         87
-  C:031FH         LINE#         88
-  C:0322H         LINE#         89
+  C:0319H         LINE#         88
+  C:0319H         LINE#         89
+  C:0319H         LINE#         90
+  C:031CH         LINE#         92
+  C:031CH         LINE#         93
+  C:031CH         LINE#         94
+  C:031FH         LINE#         95
+  C:0322H         LINE#         96
   -------         ENDPROC       MAIN
   -------         PROC          TIMER0
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/29/2020  10:55:33  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:56  PAGE 4
 
 
   -------         DO            
   D:0008H         SYMBOL        tCount
   -------         ENDDO         
-  C:0224H         LINE#         92
-  C:0241H         LINE#         98
-  C:0244H         LINE#         99
-  C:0247H         LINE#         102
-  C:024EH         LINE#         103
-  C:024EH         LINE#         105
-  C:0269H         LINE#         107
-  C:026CH         LINE#         108
-  C:026CH         LINE#         109
+  C:0224H         LINE#         99
+  C:0241H         LINE#         105
+  C:0244H         LINE#         106
+  C:0247H         LINE#         109
+  C:024EH         LINE#         110
+  C:024EH         LINE#         112
+  C:0269H         LINE#         114
+  C:026CH         LINE#         115
+  C:026CH         LINE#         116
   -------         ENDPROC       TIMER0
   -------         ENDMOD        TIMER_COUNTER_ELECTRONICWATCH_MAIN
 
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\Timer_Counter (TIMER_COUNTER_ELECTRONICWATCH_MAI
   C:00EFH         PUBLIC        ?C?LILDIDATA8
   -------         ENDMOD        ?C?LILDIDATA
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/29/2020  10:55:33  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:56  PAGE 5
 
 
 Program Size: data=24.0 xdata=0 code=806

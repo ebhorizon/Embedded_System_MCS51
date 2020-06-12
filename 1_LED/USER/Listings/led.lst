@@ -1,0 +1,177 @@
+C51 COMPILER V9.57.0.0   LED                                                               06/12/2020 14:06:36 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN ..\OBJ\led.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG OBJ
+                    -ECTEXTEND PRINT(.\Listings\led.lst) OBJECT(..\OBJ\led.obj)
+
+line level    source
+
+   1          #include "led.h"
+   2          
+   3          void LED_Delay(u16 t)
+   4          {
+   5   1              while(t--);
+   6   1      }
+   7          
+   8          // 初始化全灭
+   9          void LED_Init()
+  10          {
+  11   1              LED     = LED_DEFAULT;
+  12   1              LED_Delay(50000);
+  13   1              LED_Delay(50000);
+  14   1      }
+  15          
+  16          // LED0位操作点亮
+  17          void LED0_Light_Bit()
+  18          {
+  19   1              LED_Init();
+  20   1              LED0 = (~LED_DEFAULT) & 0x01;   // 取反的最低位
+  21   1              LED_Delay(50000);
+  22   1      }
+  23          
+  24          // LED0字操作点亮
+  25          void LED0_Light_Word()
+  26          {
+  27   1              LED_Init();
+  28   1              // 此处修改可以点亮多位
+  29   1              LED0 |= ~LED_DEFAULT;
+  30   1              LED_Delay(50000);
+  31   1      }
+  32          
+  33          // LED0闪烁
+  34          void LED0_Flash(u8 flashCount)
+  35          {
+  36   1              LED_Init();
+  37   1              for(; flashCount > 0; flashCount--)
+  38   1              {
+  39   2                      // 改变延迟时间可以改变闪烁频率
+  40   2                      LED0 = (~LED_DEFAULT) & 0x01;   // 取反的最低位
+  41   2                      LED_Delay(20000);
+  42   2                      LED0 = LED_DEFAULT    & 0x01;   // 取反的最低位
+  43   2                      LED_Delay(20000);
+  44   2              }
+  45   1      }
+  46          
+  47          // LED左移
+  48          void LED_ToLeft()
+  49          {
+  50   1              u8 i, ledStat;
+  51   1              
+  52   1              LED_Init();
+  53   1              ledStat = 0x01;
+  54   1              // 此处用到的取反思想要记住
+C51 COMPILER V9.57.0.0   LED                                                               06/12/2020 14:06:36 PAGE 2   
+
+  55   1              (LED_DEFAULT == 0x00) ? (LED = ledStat) : (LED = ~ledStat);
+  56   1              for(i = 0; i < 8; i++)
+  57   1              {
+  58   2                      LED_Delay(10000);
+  59   2                      ledStat = ledStat << 1;
+  60   2                      (LED_DEFAULT == 0x00) ? (LED = ledStat) : (LED = ~ledStat);
+  61   2              }       
+  62   1              LED_Delay(10000);
+  63   1      }
+  64          
+  65          // LED右移
+  66          void LED_ToRight()
+  67          {
+  68   1              u8 i, ledStat;
+  69   1              
+  70   1              LED_Init();
+  71   1              ledStat = 0x80;
+  72   1              (LED_DEFAULT == 0x00) ? (LED = ledStat) : (LED = ~ledStat);
+  73   1              for(i = 0; i < 8; i++)
+  74   1              {
+  75   2                      LED_Delay(10000);
+  76   2                      ledStat = ledStat >> 1;
+  77   2                      (LED_DEFAULT == 0x00) ? (LED = ledStat) : (LED = ~ledStat);
+  78   2              }       
+  79   1              LED_Delay(10000);
+  80   1      }
+  81          
+  82          // LED循环左移
+  83          // 可以参考上面的取反思想，也可以直接调用库函数（比较方便的标准操作）
+  84          void LED_ROL(u8 ROLCount)
+  85          {
+  86   1              u8 i;
+  87   1              
+  88   1              LED_Init();
+  89   1              for(; ROLCount > 0; ROLCount--)
+  90   1              {
+  91   2                      (LED_DEFAULT == 0x00) ? (LED = 0x01) : (LED = 0xFE);
+  92   2                      for(i = 0; i < 7; i++)
+  93   2                      {
+  94   3                              LED_Delay(10000);
+  95   3                              LED = _crol_(LED, 1);
+  96   3                      }
+  97   2                      LED_Delay(10000);
+  98   2              }
+  99   1      }
+ 100          
+ 101          // LED循环右移
+ 102          void LED_ROR(u8 RORCount)
+ 103          {
+ 104   1              u8 i;
+ 105   1              
+ 106   1              LED_Init();
+ 107   1              for(; RORCount > 0; RORCount--)
+ 108   1              {
+ 109   2                      (LED_DEFAULT == 0x00) ? (LED = 0x80) : (LED = 0x7F);
+ 110   2                      for(i = 0; i < 7; i++)
+ 111   2                      {
+ 112   3                              LED_Delay(10000);
+ 113   3                              LED = _cror_(LED, 1);
+ 114   3                      }
+ 115   2                      LED_Delay(10000);
+ 116   2              }
+C51 COMPILER V9.57.0.0   LED                                                               06/12/2020 14:06:36 PAGE 3   
+
+ 117   1      }
+ 118          
+ 119          // 其他代码就是自由发挥了，不再赘述
+ 120          
+ 121          // PWM（脉宽调制）调节亮度
+ 122          // 原理很简单，改变高电平（或者说点亮的电平）的占比时间——占空比即可
+ 123          void LED_PWM(u8 PWMCount)
+ 124          {
+ 125   1              u16  T    = 500;
+ 126   1              u16  Toff = 0;
+ 127   1              
+ 128   1              LED_Init();
+ 129   1              for(; PWMCount > 0; PWMCount--)
+ 130   1              {
+ 131   2                      for(Toff = 1; Toff < T; Toff++)
+ 132   2                      {
+ 133   3                              (LED_DEFAULT == 0x00) ? (LED = 0xFF) : (LED = 0x00);
+ 134   3                              LED_Delay(Toff);
+ 135   3                              
+ 136   3                              (LED_DEFAULT == 0x00) ? (LED = 0x00) : (LED = 0xFF);
+ 137   3                              LED_Delay(T - Toff);
+ 138   3                      }
+ 139   2                      
+ 140   2                      for(Toff = T - 1; Toff > 0 ; Toff--)
+ 141   2                      {
+ 142   3                              (LED_DEFAULT == 0x00) ? (LED = 0xFF) : (LED = 0x00);
+ 143   3                              LED_Delay(Toff);
+ 144   3                              
+ 145   3                              (LED_DEFAULT == 0x00) ? (LED = 0x00) : (LED = 0xFF);
+ 146   3                              LED_Delay(T - Toff);
+ 147   3                      }
+ 148   2              }
+ 149   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    347    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,20 +1,20 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/28/2020  22:57:15  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/12/2020  14:09:06  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
-E:\KEIL_V5\C51\BIN\BL51.EXE ..\OBJ\External_Interrupt1_FallingEdgeTrigger_main.obj TO ..\OBJ\External_Interrupt PRINT (.
->> \Listings\External_Interrupt.m51) RAMSIZE (256)
+E:\KEIL_V5\C51\BIN\BL51.EXE ..\OBJ\External_Interrupt0_LowLevelTrigger_main.obj TO ..\OBJ\External_Interrupt PRINT (.\Li
+>> stings\External_Interrupt.m51) RAMSIZE (256)
 
 
 MEMORY MODEL: SMALL
 
 
 INPUT MODULES INCLUDED:
-  ..\OBJ\External_Interrupt1_FallingEdgeTrigger_main.obj (EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA)
+  ..\OBJ\External_Interrupt0_LowLevelTrigger_main.obj (EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN)
   E:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
 
 
-LINK MAP OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA)
+LINK MAP OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -26,44 +26,43 @@ LINK MAP OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT1_FALLINGEDGET
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     000DH     UNIT         ?PR?DELAY10MS?EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
-                    0010H     0003H                  *** GAP ***
-            CODE    0013H     0003H     ABSOLUTE     
-            CODE    0016H     0020H     UNIT         ?PR?EINT1?EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
-            CODE    0036H     000CH     UNIT         ?C_C51STARTUP
-            CODE    0042H     0008H     UNIT         ?PR?MAIN?EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
-            CODE    004AH     0007H     UNIT         ?PR?EINT1_INIT?EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0020H     UNIT         ?PR?EINT0?EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
+            CODE    0026H     000DH     UNIT         ?PR?DELAY10MS?EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
+            CODE    0033H     000CH     UNIT         ?C_C51STARTUP
+            CODE    003FH     0008H     UNIT         ?PR?MAIN?EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
+            CODE    0047H     0007H     UNIT         ?PR?EINT0_INIT?EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
 
 
 
-OVERLAY MAP OF MODULE:   ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA)
+OVERLAY MAP OF MODULE:   ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN)
 
 
 SEGMENT
   +--> CALLED SEGMENT
 ---------------------
-?PR?EINT1?EXTERNAL_INTERRUPT1_FALLING...
-  +--> ?PR?DELAY10MS?EXTERNAL_INTERRUPT1_FAL...
+?PR?EINT0?EXTERNAL_INTERRUPT0_LOWLEVE...
+  +--> ?PR?DELAY10MS?EXTERNAL_INTERRUPT0_LOW...
 
 *** NEW ROOT ***************************************************
 
 ?C_C51STARTUP
-  +--> ?PR?MAIN?EXTERNAL_INTERRUPT1_FALLINGE...
+  +--> ?PR?MAIN?EXTERNAL_INTERRUPT0_LOWLEVEL...
 
-?PR?MAIN?EXTERNAL_INTERRUPT1_FALLINGE...
-  +--> ?PR?EINT1_INIT?EXTERNAL_INTERRUPT1_FA...
+?PR?MAIN?EXTERNAL_INTERRUPT0_LOWLEVEL...
+  +--> ?PR?EINT0_INIT?EXTERNAL_INTERRUPT0_LO...
 
 
 
-SYMBOL TABLE OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA)
+SYMBOL TABLE OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN)
 
   VALUE           TYPE          NAME
   ----------------------------------
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/28/2020  22:57:15  PAGE 2
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:06  PAGE 2
 
 
-
-  -------         MODULE        EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
+  -------         MODULE        EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
@@ -71,59 +70,59 @@ SYMBOL TABLE OF MODULE:  ..\OBJ\External_Interrupt (EXTERNAL_INTERRUPT1_FALLINGE
   B:00A8H.7       PUBLIC        EA
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  B:00B0H.3       PUBLIC        INT1
-  C:0042H         PUBLIC        main
+  B:00B0H.2       PUBLIC        INT0
+  C:003FH         PUBLIC        main
   D:0098H         PUBLIC        SCON
-  C:0003H         PUBLIC        Delay10ms
+  C:0026H         PUBLIC        Delay10ms
   D:0088H         PUBLIC        TCON
+  B:00A8H.0       PUBLIC        EX0
   B:0088H.0       PUBLIC        IT0
-  B:00A8H.2       PUBLIC        EX1
-  C:004AH         PUBLIC        EINT1_Init
-  C:0016H         PUBLIC        EINT1
+  C:0047H         PUBLIC        EINT0_Init
+  C:0006H         PUBLIC        EINT0
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
-  -------         PROC          EINT1_INIT
-  C:004AH         LINE#         12
-  C:004AH         LINE#         13
-  C:004AH         LINE#         15
-  C:004CH         LINE#         17
-  C:004EH         LINE#         19
-  C:0050H         LINE#         20
-  -------         ENDPROC       EINT1_INIT
+  -------         PROC          EINT0_INIT
+  C:0047H         LINE#         17
+  C:0047H         LINE#         18
+  C:0047H         LINE#         20
+  C:0049H         LINE#         22
+  C:004BH         LINE#         24
+  C:004DH         LINE#         25
+  -------         ENDPROC       EINT0_INIT
   -------         PROC          DELAY10MS
   -------         DO            
   D:0005H         SYMBOL        a
   D:0006H         SYMBOL        b
   D:0007H         SYMBOL        c
   -------         ENDDO         
-  C:0003H         LINE#         22
-  C:0003H         LINE#         23
-  C:0003H         LINE#         25
-  C:0005H         LINE#         26
-  C:0007H         LINE#         27
-  C:000FH         LINE#         28
+  C:0026H         LINE#         27
+  C:0026H         LINE#         28
+  C:0026H         LINE#         30
+  C:0028H         LINE#         31
+  C:002AH         LINE#         32
+  C:0032H         LINE#         33
   -------         ENDPROC       DELAY10MS
   -------         PROC          MAIN
-  C:0042H         LINE#         30
-  C:0042H         LINE#         31
-  C:0042H         LINE#         32
-  C:0045H         LINE#         33
-  C:0048H         LINE#         34
+  C:003FH         LINE#         35
+  C:003FH         LINE#         36
+  C:003FH         LINE#         37
+  C:0042H         LINE#         38
+  C:0045H         LINE#         39
   -------         ENDPROC       MAIN
-  -------         PROC          EINT1
-  C:0016H         LINE#         39
-  C:0021H         LINE#         44
-  C:0024H         LINE#         45
-  C:0024H         LINE#         46
-  C:0027H         LINE#         47
-  C:002AH         LINE#         48
-  C:002DH         LINE#         49
-  C:002DH         LINE#         50
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/28/2020  22:57:15  PAGE 3
+  -------         PROC          EINT0
+  C:0006H         LINE#         44
+  C:0011H         LINE#         49
+  C:0014H         LINE#         50
+  C:0014H         LINE#         51
+  C:0017H         LINE#         52
+  C:001AH         LINE#         53
+  C:001DH         LINE#         54
+  C:001DH         LINE#         55
+  -------         ENDPROC       EINT0
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/12/2020  14:09:06  PAGE 3
 
 
-  -------         ENDPROC       EINT1
-  -------         ENDMOD        EXTERNAL_INTERRUPT1_FALLINGEDGETRIGGER_MA
+  -------         ENDMOD        EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
 
 Program Size: data=9.0 xdata=0 code=78
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
