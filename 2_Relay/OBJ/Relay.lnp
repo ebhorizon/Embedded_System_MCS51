@@ -1,4 +1,0 @@
-"..\OBJ\Relay_main.obj",
-"..\OBJ\relay.obj" 
-TO "..\OBJ\Relay" 
-PRINT(".\Listings\Relay.m51") RAMSIZE(256) 

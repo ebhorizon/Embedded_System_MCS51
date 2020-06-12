@@ -1,4 +1,0 @@
-"..\OBJ\SeparateKeys_ElectronicWatch_main.obj",
-"..\OBJ\74xx138.obj" 
-TO "..\OBJ\Keys" 
-PRINT(".\Listings\Keys.m51") RAMSIZE(256) 
