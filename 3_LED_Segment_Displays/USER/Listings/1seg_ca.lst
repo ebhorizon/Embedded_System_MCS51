@@ -1,0 +1,89 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   1SEG_CA                                                           05/25/2020 16:09:12 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 1SEG_CA
+OBJECT MODULE PLACED IN ..\OBJ\1seg_ca.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\1seg_ca.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\1seg_ca.lst) OBJECT(..\OBJ\1seg_ca.obj)
+
+line level    source
+
+   1          #include "1seg_ca.h"
+   2          
+   3          // 共阳数码管段选，0 ~ F & . & 空
+   4          uchar code SegSel_CA[] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 
+   5                                                            0x82, 0xF8, 0x80, 0x90, 0x88, 0x83, 
+   6                                                            0xC6, 0xA1, 0x86, 0x8E, 0x7F, 0xFF};
+   7          
+   8          // 选择要显示的数码
+   9          void LED_1Seg_Display(uchar dat)
+  10          {
+  11   1              LED_SEG_CA = SegSel_CA[dat];
+  12   1      }
+  13          
+  14          // 检测逻辑电平
+  15          void LED_1Seg_LogicLevel(uchar dat)
+  16          {
+  17   1              // 高电平显示H，低电平显示L
+  18   1              LED_SEG_CA = (dat ? 0x89 : 0xC7);
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     20    ----
+   CONSTANT SIZE    =     18    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   1SEG_CA                                                           05/25/2020 16:09:12 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 1SEG_CA
+OBJECT MODULE PLACED IN ..\OBJ\1seg_ca.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\1seg_ca.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\1seg_ca.lst) OBJECT(..\OBJ\1seg_ca.obj)
+
+line level    source
+
+   1          #include "1seg_ca.h"
+   2          
+   3          // 共阳数码管段选，0 ~ F & . & 空
+   4          uchar code SegSel_CA[] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 
+   5                                                            0x82, 0xF8, 0x80, 0x90, 0x88, 0x83, 
+   6                                                            0xC6, 0xA1, 0x86, 0x8E, 0x7F, 0xFF};
+   7          
+   8          // 选择要显示的数码
+   9          void LED_1Seg_Display(uchar dat)
+  10          {
+  11   1              LED_SEG_CA = SegSel_CA[dat];
+  12   1      }
+  13          
+  14          // 检测逻辑电平
+  15          void LED_1Seg_LogicLevel(uchar dat)
+  16          {
+  17   1              // 高电平显示H，低电平显示L
+  18   1              LED_SEG_CA = (dat ? 0x89 : 0xC7);
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     20    ----
+   CONSTANT SIZE    =     18    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

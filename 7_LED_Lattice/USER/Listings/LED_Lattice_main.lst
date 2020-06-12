@@ -1,0 +1,189 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   LED_LATTICE_MAIN                                                  06/06/2020 18:47:41 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LED_LATTICE_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\LED_Lattice_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE LED_Lattice_main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG OB
+                    -JECTEXTEND PRINT(.\Listings\LED_Lattice_main.lst) OBJECT(..\OBJ\LED_Lattice_main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include "74xx595.h"
+   3          
+   4          // 定义常用类型
+   5          typedef unsigned char u8;
+   6          typedef unsigned int u16;
+   7          
+   8          // 行选
+   9          u8 code LedRow[]       = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+  10          // 列选：中
+  11          u8 code LedCol_zhong[] = {0x18,0xFF,0xDB,0xDB,0xFF,0xDB,0x18,0x18};
+  12          // 列选：央
+  13          u8 code LedCol_yang[]  = {0x18,0x7C,0x5A,0x5A,0xFF,0x38,0x6C,0xC7};
+  14          
+  15          void Delay(u16 i)
+  16          {
+  17   1              while(i--);
+  18   1      }
+  19          
+  20          void main()
+  21          {       
+  22   1              // 规定自下到上，自右到左为自高到低
+  23   1              
+  24   1              u8 i, j;        // 8位数据循环用
+  25   1              u16 stop;       // 视觉停留刷新用
+  26   1              u8 temp[2];     // 保存显示数组
+  27   1              
+  28   1              while(1)
+  29   1              {               
+  30   2                      // 循环亮灯
+  31   2                      for(i = 0; i < 8; i++)
+  32   2                      {
+  33   3                              for(j = 0; j < 8; j++)
+  34   3                              {
+  35   4                                      // 这个行选每次都要初始化的
+  36   4                                      temp[1] = 0x01 << i;
+  37   4                                      temp[0] = ~(~0xFE << j);
+  38   4                                      _74XX595_SendByte(2, temp);
+  39   4                                      Delay(30000);
+  40   4                              }
+  41   3                      }
+  42   2      
+  43   2                      // 显示“中”
+  44   2                      for(stop = 100; stop > 0; stop--)
+  45   2                      {
+  46   3                              for(i = 0; i < 8; i++)
+  47   3                              {
+  48   4                                      temp[0] = ~LedCol_zhong[i];
+  49   4                                      temp[1] = LedRow[i];
+  50   4                                      _74XX595_SendByte(2, temp);
+  51   4                                      Delay(10);
+  52   4                              }
+  53   3                      }
+  54   2                      
+C51 COMPILER V9.57.0.0   LED_LATTICE_MAIN                                                  06/06/2020 18:47:41 PAGE 2   
+
+  55   2                      // 显示“央”
+  56   2                      for(stop = 100; stop > 0; stop--)
+  57   2                      {
+  58   3                              for(i = 0; i < 8; i++)
+  59   3                              {
+  60   4                                      temp[0] = ~LedCol_yang[i];
+  61   4                                      temp[1] = LedRow[i];
+  62   4                                      _74XX595_SendByte(2, temp);
+  63   4                                      Delay(10);
+  64   4                              }
+  65   3                      }
+  66   2              }
+  67   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    233    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   LED_LATTICE_MAIN                                                  06/06/2020 18:47:41 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LED_LATTICE_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\LED_Lattice_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE LED_Lattice_main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG OB
+                    -JECTEXTEND PRINT(.\Listings\LED_Lattice_main.lst) OBJECT(..\OBJ\LED_Lattice_main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include "74xx595.h"
+   3          
+   4          // 定义常用类型
+   5          typedef unsigned char u8;
+   6          typedef unsigned int u16;
+   7          
+   8          // 行选
+   9          u8 code LedRow[]       = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+  10          // 列选：中
+  11          u8 code LedCol_zhong[] = {0x18,0xFF,0xDB,0xDB,0xFF,0xDB,0x18,0x18};
+  12          // 列选：央
+  13          u8 code LedCol_yang[]  = {0x18,0x7C,0x5A,0x5A,0xFF,0x38,0x6C,0xC7};
+  14          
+  15          void Delay(u16 i)
+  16          {
+  17   1              while(i--);
+  18   1      }
+  19          
+  20          void main()
+  21          {       
+  22   1              // 规定自下到上，自右到左为自高到低
+  23   1              
+  24   1              u8 i, j;        // 8位数据循环用
+  25   1              u16 stop;       // 视觉停留刷新用
+  26   1              u8 temp[2];     // 保存显示数组
+  27   1              
+  28   1              while(1)
+  29   1              {               
+  30   2                      // 循环亮灯
+  31   2                      for(i = 0; i < 8; i++)
+  32   2                      {
+  33   3                              for(j = 0; j < 8; j++)
+  34   3                              {
+  35   4                                      // 这个行选每次都要初始化的
+  36   4                                      temp[1] = 0x01 << i;
+  37   4                                      temp[0] = ~(~0xFE << j);
+  38   4                                      _74XX595_SendByte(2, temp);
+  39   4                                      Delay(30000);
+  40   4                              }
+  41   3                      }
+  42   2      
+  43   2                      // 显示“中”
+  44   2                      for(stop = 100; stop > 0; stop--)
+  45   2                      {
+  46   3                              for(i = 0; i < 8; i++)
+  47   3                              {
+  48   4                                      temp[0] = ~LedCol_zhong[i];
+  49   4                                      temp[1] = LedRow[i];
+  50   4                                      _74XX595_SendByte(2, temp);
+  51   4                                      Delay(10);
+  52   4                              }
+  53   3                      }
+  54   2                      
+C51 COMPILER V9.57.0.0   LED_LATTICE_MAIN                                                  06/06/2020 18:47:41 PAGE 2   
+
+  55   2                      // 显示“央”
+  56   2                      for(stop = 100; stop > 0; stop--)
+  57   2                      {
+  58   3                              for(i = 0; i < 8; i++)
+  59   3                              {
+  60   4                                      temp[0] = ~LedCol_yang[i];
+  61   4                                      temp[1] = LedRow[i];
+  62   4                                      _74XX595_SendByte(2, temp);
+  63   4                                      Delay(10);
+  64   4                              }
+  65   3                      }
+  66   2              }
+  67   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    233    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

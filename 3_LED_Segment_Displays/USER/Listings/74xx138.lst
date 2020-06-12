@@ -1,0 +1,77 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   74XX138                                                           05/27/2020 23:35:45 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 74XX138
+OBJECT MODULE PLACED IN ..\OBJ\74xx138.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\74xx138.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\74xx138.lst) OBJECT(..\OBJ\74xx138.obj)
+
+line level    source
+
+   1          #include "74xx138.h"
+   2          
+   3          // 输入使第几位为低电平
+   4          void _74XX138_SetLow(uchar dat)
+   5          {
+   6   1              // 使用8421BCD的思想来编写译码器算法
+   7   1              _74XX138_C = (dat >= 4 ? 1 : 0);
+   8   1              if(dat >= 4) dat -= 4;
+   9   1              _74XX138_B = (dat >= 2 ? 1 : 0);
+  10   1              if(dat >= 2) dat -= 2;
+  11   1              _74XX138_A = (dat >= 1 ? 1 : 0);
+  12   1      }
+  13          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   74XX138                                                           05/27/2020 23:35:45 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 74XX138
+OBJECT MODULE PLACED IN ..\OBJ\74xx138.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\74xx138.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\74xx138.lst) OBJECT(..\OBJ\74xx138.obj)
+
+line level    source
+
+   1          #include "74xx138.h"
+   2          
+   3          // 输入使第几位为低电平
+   4          void _74XX138_SetLow(uchar dat)
+   5          {
+   6   1              // 使用8421BCD的思想来编写译码器算法
+   7   1              _74XX138_C = (dat >= 4 ? 1 : 0);
+   8   1              if(dat >= 4) dat -= 4;
+   9   1              _74XX138_B = (dat >= 2 ? 1 : 0);
+  10   1              if(dat >= 2) dat -= 2;
+  11   1              _74XX138_A = (dat >= 1 ? 1 : 0);
+  12   1      }
+  13          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

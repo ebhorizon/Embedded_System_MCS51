@@ -1,0 +1,159 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN                          05/28/2020 22:54:40 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\External_Interrupt0_LowLevelTrigger_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE External_Interrupt0_LowLevelTrigger_main.c OPTIMIZE(8,SPEED) BROWSE DEBU
+                    -G OBJECTEXTEND PRINT(.\Listings\External_Interrupt0_LowLevelTrigger_main.lst) OBJECT(..\OBJ\External_Interrupt0_LowLevel
+                    -Trigger_main.obj)
+
+line level    source
+
+   1          /* 外部中断0——低电平触发 */
+   2          
+   3          #include <reg52.h>
+   4          
+   5          typedef unsigned char u8;       // 0 ~ 255
+   6          typedef unsigned int u16;       // 0 ~ 65535
+   7          
+   8          #define LED P0                          // 定义LED接在P0
+   9          sbit KEY = P3^2;                        // 定义触发外部中断0的按键
+  10          
+  11          // 外部中断0初始化函数
+  12          void EINT0_Init()
+  13          {
+  14   1              // 触发方式：低电平触发
+  15   1              IT0 = 0;
+  16   1              // 开启外部中断0
+  17   1              EX0 = 1;
+  18   1              // 开启全局中断
+  19   1              EA  = 1;
+  20   1      }
+  21          
+  22          void Delay10ms()                        //误差 0us
+  23          {
+  24   1          u8 a, b, c;
+  25   1          for(c = 1; c > 0; c--)
+  26   1              for(b = 38; b > 0; b--)
+  27   1                  for(a = 130; a > 0; a--);
+  28   1      }
+  29          
+  30          void main()
+  31          {
+  32   1              LED = 0x33;                             // LED显示：0011 0011
+  33   1              EINT0_Init();
+  34   1              while(1);
+  35   1      }
+  36          
+  37          /* 1. 中断函数可以不写返回类型
+  38             2. 中断函数可以加一句using表示使用的寄存器组（0 ~ 3） */
+  39          void EINT0() interrupt 0
+  40          {
+  41   1              // 进入中断时，LED灯亮灭状态翻转
+  42   1              // 不松开按键，中断反复进行，LED刷新快，肉眼无法分辨——全亮
+  43   1              
+  44   1              // ----!!!!!!!!此处的按键程序不标准，仅作为测试使用!!!!!!!!----
+  45   1              if(!INT0)                               // 按键按下就是接GND
+  46   1              {
+  47   2                      Delay10ms();
+  48   2                      while(!INT0);           // 判断按键是否松开
+  49   2                      LED = ~LED;
+  50   2              }
+  51   1      }
+
+
+C51 COMPILER V9.57.0.0   EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN                          05/28/2020 22:54:40 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     60    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN                          05/28/2020 22:54:40 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\External_Interrupt0_LowLevelTrigger_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE External_Interrupt0_LowLevelTrigger_main.c OPTIMIZE(8,SPEED) BROWSE DEBU
+                    -G OBJECTEXTEND PRINT(.\Listings\External_Interrupt0_LowLevelTrigger_main.lst) OBJECT(..\OBJ\External_Interrupt0_LowLevel
+                    -Trigger_main.obj)
+
+line level    source
+
+   1          /* 外部中断0——低电平触发 */
+   2          
+   3          #include <reg52.h>
+   4          
+   5          typedef unsigned char u8;       // 0 ~ 255
+   6          typedef unsigned int u16;       // 0 ~ 65535
+   7          
+   8          #define LED P0                          // 定义LED接在P0
+   9          sbit KEY = P3^2;                        // 定义触发外部中断0的按键
+  10          
+  11          // 外部中断0初始化函数
+  12          void EINT0_Init()
+  13          {
+  14   1              // 触发方式：低电平触发
+  15   1              IT0 = 0;
+  16   1              // 开启外部中断0
+  17   1              EX0 = 1;
+  18   1              // 开启全局中断
+  19   1              EA  = 1;
+  20   1      }
+  21          
+  22          void Delay10ms()                        //误差 0us
+  23          {
+  24   1          u8 a, b, c;
+  25   1          for(c = 1; c > 0; c--)
+  26   1              for(b = 38; b > 0; b--)
+  27   1                  for(a = 130; a > 0; a--);
+  28   1      }
+  29          
+  30          void main()
+  31          {
+  32   1              LED = 0x33;                             // LED显示：0011 0011
+  33   1              EINT0_Init();
+  34   1              while(1);
+  35   1      }
+  36          
+  37          /* 1. 中断函数可以不写返回类型
+  38             2. 中断函数可以加一句using表示使用的寄存器组（0 ~ 3） */
+  39          void EINT0() interrupt 0
+  40          {
+  41   1              // 进入中断时，LED灯亮灭状态翻转
+  42   1              // 不松开按键，中断反复进行，LED刷新快，肉眼无法分辨——全亮
+  43   1              
+  44   1              // ----!!!!!!!!此处的按键程序不标准，仅作为测试使用!!!!!!!!----
+  45   1              if(!INT0)                               // 按键按下就是接GND
+  46   1              {
+  47   2                      Delay10ms();
+  48   2                      while(!INT0);           // 判断按键是否松开
+  49   2                      LED = ~LED;
+  50   2              }
+  51   1      }
+
+
+C51 COMPILER V9.57.0.0   EXTERNAL_INTERRUPT0_LOWLEVELTRIGGER_MAIN                          05/28/2020 22:54:40 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     60    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

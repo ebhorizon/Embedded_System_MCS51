@@ -1,0 +1,231 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   BUZZER                                                            06/12/2020 11:49:25 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN ..\OBJ\buzzer.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\buzzer.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG 
+                    -OBJECTEXTEND PRINT(.\Listings\buzzer.lst) OBJECT(..\OBJ\buzzer.obj)
+
+line level    source
+
+   1          #include "buzzer.h"
+   2          
+   3          /* 钢琴的88键音频率计算法：
+   4             十二平均律的音阶系数为2^(1 / 12) = 1.0594630944，A1为27.5Hz，从而可得频率值
+   5             为了减少计算时带来的时间延迟，保存各个A阶（A1 ~ A8）为数组即可 */
+   6          float code Freq_A[8] = {27.5, 55.0, 110.0, 220.0, 440.0, 880.0, 1760.0, 3520.0};
+   7          // 提前计算音阶系数
+   8          float Coef = 1.0594630944;
+   9          u8 TINT0_H, TINT0_L;
+  10          
+  11          void Buzzer_Delay_nms(u16 t)
+  12          {
+  13   1              u8 i = 245;
+  14   1              
+  15   1              while(t--)
+  16   1              {
+  17   2                      while(i--);
+  18   2                      i = 245;
+  19   2                      while(i--);
+  20   2              }
+  21   1      }
+  22          
+  23          // 返回频率的定时器初值设置值
+  24          #if CRYSTAL == 12
+  25          u16 Buzzer_InitValue(u8 index)
+  26          {
+  27   1              float Freq = 0.0;
+  28   1              u8 i;
+  29   1              
+  30   1              Freq += Freq_A[index / 12];
+  31   1              for(i = 0; i < (index - 1) % 12; i++)
+  32   1              {
+  33   2                      Freq *= Coef;
+  34   2              }
+  35   1              
+  36   1              return((u16)(65536 - 500000 / Freq));
+  37   1      }
+  38          #elif CRYSTAL == 11.0592
+              u16 Buzzer_InitValue(u8 index)
+              {
+                      float Freq = 0.0;
+                      u8 i;
+                      
+                      Freq += Freq_A[index / 12];
+                      for(i = 0; i < (index - 1) % 12; i++)
+                      {
+                              Freq *= Coef;
+                      }
+                      
+                      return((u16)(65536 - 460800 / Freq));
+              }
+              #endif
+  53          
+  54          // 定时器0初始化
+C51 COMPILER V9.57.0.0   BUZZER                                                            06/12/2020 11:49:25 PAGE 2   
+
+  55          void TINT0_Init()
+  56          {
+  57   1              TMOD |= 0x01;
+  58   1              ET0   = 1;
+  59   1              EA    = 1;
+  60   1      }
+  61          
+  62          // 蜂鸣器初始化
+  63          void Buzzer_Init()
+  64          {
+  65   1              TINT0_Init();   // 音调定时器
+  66   1      }
+  67          
+  68          // 蜂鸣器发声函数
+  69          void Buzzer_Play(u8 index, u16 delay)
+  70          {
+  71   1              u16 initVal = Buzzer_InitValue(index); 
+  72   1              
+  73   1              TINT0_H   = initVal / 256;
+  74   1              TINT0_L   = initVal % 256;
+  75   1              TH0       = TINT0_H;                            // 赋值定时器时间，决定频率
+  76   1              TL0       = TINT0_L;
+  77   1              TR0       = 1;                                  // 打开定时器0播放
+  78   1              Buzzer_Delay_nms(delay);
+  79   1      }
+  80          
+  81          void TINT0() interrupt 1
+  82          {
+  83   1              TR0    = 0;
+  84   1      
+  85   1              Buzzer = !Buzzer;
+  86   1              TH0    = TINT0_H;
+  87   1              TL0    = TINT0_L;
+  88   1              
+  89   1              TR0    = 1;
+  90   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    229    ----
+   CONSTANT SIZE    =     32    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   BUZZER                                                            06/10/2020 21:01:05 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN ..\OBJ\buzzer.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\buzzer.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG 
+                    -OBJECTEXTEND PRINT(.\Listings\buzzer.lst) OBJECT(..\OBJ\buzzer.obj)
+
+line level    source
+
+   1          #include "buzzer.h"
+   2          
+   3          // 以下是钢琴88键对应频率表，中央C为C4
+   4          float code Freq[88] = 
+   5          {       /*  A,   #A,      B,       C,       #C,      D,       #D,      E,      F,       #F,      G,       #G */
+   6          /* 1 */ 27.5,29.135,  30.868,  32.703,  34.648,  36.708,  38.891,  41.203, 43.654,  46.249,  48.999,  51.9
+             -13,
+   7          /* 2 */ 55,  58.271,  61.735,  65.406,  69.296,  73.416,  77.782,  82.407, 87.307,  92.499,  97.999,  103.8
+             -26,
+   8          /* 3 */ 110, 116.541, 123.471, 130.813, 138.591, 146.832, 155.563, 164.814,174.614, 184.997, 195.998, 207.
+             -652,
+   9          /* 4 */ 220, 233.082, 246.942, 261.626, 277.183, 293.665, 311.127, 329.628,349.228, 369.994, 391.995, 415.
+             -305,
+  10          /* 5 */ 440, 466.164, 493.883, 523.251, 554.365, 587.33,  622.254, 659.255,698.456, 739.989, 783.991, 830.
+             -609,
+  11          /* 6 */ 880, 932.328, 987.767, 1046.502,1108.731,1174.659,1244.51 ,1318.51,1396.913,1479.978,1567.982,1661
+             -.219,
+  12          /* 7 */ 1760,1864.655,1975.533,2093.004,2217.461,2349.318,2489.016,2637.02,2793.826,2959.955,3135.96,3322.
+             -437,
+  13          /* 8 */ 3520,3729.31, 3951.066,4186.009
+  14          };
+  15          
+  16          uchar TINT0_H, TINT0_L;
+  17          
+  18          void Buzzer_Delay_nms(uint t)
+  19          {
+  20   1              uchar i = 245;
+  21   1              
+  22   1              while(t--)
+  23   1              {
+  24   2                      while(i--);
+  25   2                      i = 245;
+  26   2                      while(i--);
+  27   2              }
+  28   1      }
+  29          
+  30          // 返回频率的定时器初值设置值
+  31          #if CRYSTAL == 12
+  32          uint Buzzer_InitValue(uchar index)
+  33          {
+  34   1              return((uint)(65536 - 500000 / Freq[index]));
+  35   1      }
+  36          #elif CRYSTAL == 11.0592
+              uint Buzzer_InitValue(uchar index)
+              {
+                      return((uint)(65536 - 460800 / Freq[index]));
+              }
+              #endif
+  42          
+  43          // 定时器0初始化
+  44          void TINT0_Init()
+  45          {
+  46   1              TMOD |= 0x01;
+  47   1              ET0   = 1;
+C51 COMPILER V9.57.0.0   BUZZER                                                            06/10/2020 21:01:05 PAGE 2   
+
+  48   1              EA    = 1;
+  49   1      }
+  50          
+  51          // 蜂鸣器初始化
+  52          void Buzzer_Init()
+  53          {
+  54   1              TINT0_Init();   // 音调定时器
+  55   1      }
+  56          
+  57          // 蜂鸣器发声函数
+  58          void Buzzer_Play(uchar index, uint delay)
+  59          {
+  60   1              uint initVal = Buzzer_InitValue(index); 
+  61   1              
+  62   1              TINT0_H   = initVal / 256;
+  63   1              TINT0_L   = initVal % 256;
+  64   1              TH0       = TINT0_H;                            // 赋值定时器时间，决定频率
+  65   1              TL0       = TINT0_L;
+  66   1              TR0       = 1;                                  // 打开定时器0播放
+  67   1              Buzzer_Delay_nms(delay);
+  68   1      }
+  69          
+  70          void TINT0() interrupt 1
+  71          {
+  72   1              TR0    = 0;
+  73   1      
+  74   1              Buzzer = !Buzzer;
+  75   1              TH0    = TINT0_H;
+  76   1              TL0    = TINT0_L;
+  77   1              
+  78   1              TR0    = 1;
+  79   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    131    ----
+   CONSTANT SIZE    =    352    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

@@ -1,0 +1,121 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   74XX164                                                           05/27/2020 18:14:34 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 74XX164
+OBJECT MODULE PLACED IN ..\OBJ\74xx164.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\74xx164.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\74xx164.lst) OBJECT(..\OBJ\74xx164.obj)
+
+line level    source
+
+   1          #include "74xx164.h"
+   2          
+   3          void _74XX164_Delay(uchar t)
+   4          {
+   5   1              while(t--);
+   6   1      }
+   7          
+   8          // 74XX164发送一个字节
+   9          void _74XX164_SendByte(uchar dat)
+  10          {
+  11   1          uchar i;
+  12   1              
+  13   1          for(i = 0; i < 8; i++)
+  14   1          {
+  15   2                      Data  = dat >> 7;       // 高位到低位发送
+  16   2                      dat <<= 1;                      // 数据左移准备下次发送
+  17   2              CLK   = 0;                      // 等待数据
+  18   2                      // _nop_();
+  19   2                      // _nop_();
+  20   2              CLK   = 1;                      // 上升沿发送数据
+  21   2          }
+  22   1      }
+  23          
+  24          // 74XX164开启
+  25          void _74XX164_Enable()
+  26          {
+  27   1              CLR = 1;
+  28   1      }
+  29          
+  30          // 74XX164关闭
+  31          void _74XX164_Disable()
+  32          {
+  33   1              CLR = 0;
+  34   1              _74XX164_Delay(500);
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     43    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   74XX164                                                           05/27/2020 18:14:34 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 74XX164
+OBJECT MODULE PLACED IN ..\OBJ\74xx164.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\74xx164.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\HARDWARE) DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\74xx164.lst) OBJECT(..\OBJ\74xx164.obj)
+
+line level    source
+
+   1          #include "74xx164.h"
+   2          
+   3          void _74XX164_Delay(uchar t)
+   4          {
+   5   1              while(t--);
+   6   1      }
+   7          
+   8          // 74XX164发送一个字节
+   9          void _74XX164_SendByte(uchar dat)
+  10          {
+  11   1          uchar i;
+  12   1              
+  13   1          for(i = 0; i < 8; i++)
+  14   1          {
+  15   2                      Data  = dat >> 7;       // 高位到低位发送
+  16   2                      dat <<= 1;                      // 数据左移准备下次发送
+  17   2              CLK   = 0;                      // 等待数据
+  18   2                      // _nop_();
+  19   2                      // _nop_();
+  20   2              CLK   = 1;                      // 上升沿发送数据
+  21   2          }
+  22   1      }
+  23          
+  24          // 74XX164开启
+  25          void _74XX164_Enable()
+  26          {
+  27   1              CLR = 1;
+  28   1      }
+  29          
+  30          // 74XX164关闭
+  31          void _74XX164_Disable()
+  32          {
+  33   1              CLR = 0;
+  34   1              _74XX164_Delay(500);
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     43    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e

@@ -1,0 +1,157 @@
+<<<<<<< HEAD
+C51 COMPILER V9.57.0.0   TIMER_COUNTER_SQUAREWAVE_MAIN                                     05/29/2020 10:46:34 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TIMER_COUNTER_SQUAREWAVE_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\Timer_Counter_SquareWave_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE Timer_Counter_SquareWave_main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXT
+                    -END PRINT(.\Listings\Timer_Counter_SquareWave_main.lst) OBJECT(..\OBJ\Timer_Counter_SquareWave_main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          typedef unsigned char u8;       // 0 ~ 255
+   4          typedef unsigned int u16;       // 0 ~ 65535
+   5          
+   6          // 定义方波的频率：8Hz ~ 500kHz
+   7          #define SW_FREQ 100
+   8          /* 1. 使用12MHz晶振，时钟周期为1/12us，机器周期为(12 * 1 / 12) = 1us
+   9             2. TH = (2^16 - HalfPeriod) / (2^8) = (65536 - HalfPeriod) / 256
+  10             3. TL = (2^16 - HalfPeriod) % (2^8) = (65536 - HalfPeriod) % 256 */
+  11          u8 TH_Init = (65536 - 1000000 / SW_FREQ / 2) / 256;
+  12          u8 TL_Init = (65536 - 1000000 / SW_FREQ / 2) % 256;
+  13          
+  14          // 定义方波输出端
+  15          sbit SW_Out = P1^0;
+  16          
+  17          // 定时/计数器0的初始化函数
+  18          void TINT0_Init()
+  19          {
+  20   1              /* 定时器0，工作方式1，或运算防止移植的时候影响其他定时器
+  21   1                 方式1：16位加1计数器 */
+  22   1              TMOD |= 0x01;
+  23   1              
+  24   1              // 打开定时器0
+  25   1              TR0 = 1;
+  26   1              
+  27   1              // 此处注意，由于需要重装载，不要让程序过多计算
+  28   1              TH0 = TH_Init;
+  29   1              TL0 = TL_Init;
+  30   1              
+  31   1              // 定时器0中断和总中断开关打开
+  32   1              ET0 = 1;
+  33   1              EA  = 1;
+  34   1      }
+  35          
+  36          void main()
+  37          {
+  38   1              TINT0_Init();
+  39   1              SW_Out = 1;
+  40   1              while(1);
+  41   1      }
+  42          
+  43          void TINT0() interrupt 1
+  44          {
+  45   1              // 重装载
+  46   1              TH0 = TH_Init;
+  47   1              TL0 = TL_Init;
+  48   1              
+  49   1              // 电平翻转
+  50   1              SW_Out = ~SW_Out;
+  51   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.57.0.0   TIMER_COUNTER_SQUAREWAVE_MAIN                                     05/29/2020 10:46:34 PAGE 2   
+
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+=======
+C51 COMPILER V9.57.0.0   TIMER_COUNTER_SQUAREWAVE_MAIN                                     05/29/2020 10:46:34 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TIMER_COUNTER_SQUAREWAVE_MAIN
+OBJECT MODULE PLACED IN ..\OBJ\Timer_Counter_SquareWave_main.obj
+COMPILER INVOKED BY: e:\Keil_v5\C51\BIN\C51.EXE Timer_Counter_SquareWave_main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXT
+                    -END PRINT(.\Listings\Timer_Counter_SquareWave_main.lst) OBJECT(..\OBJ\Timer_Counter_SquareWave_main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          typedef unsigned char u8;       // 0 ~ 255
+   4          typedef unsigned int u16;       // 0 ~ 65535
+   5          
+   6          // 定义方波的频率：8Hz ~ 500kHz
+   7          #define SW_FREQ 100
+   8          /* 1. 使用12MHz晶振，时钟周期为1/12us，机器周期为(12 * 1 / 12) = 1us
+   9             2. TH = (2^16 - HalfPeriod) / (2^8) = (65536 - HalfPeriod) / 256
+  10             3. TL = (2^16 - HalfPeriod) % (2^8) = (65536 - HalfPeriod) % 256 */
+  11          u8 TH_Init = (65536 - 1000000 / SW_FREQ / 2) / 256;
+  12          u8 TL_Init = (65536 - 1000000 / SW_FREQ / 2) % 256;
+  13          
+  14          // 定义方波输出端
+  15          sbit SW_Out = P1^0;
+  16          
+  17          // 定时/计数器0的初始化函数
+  18          void TINT0_Init()
+  19          {
+  20   1              /* 定时器0，工作方式1，或运算防止移植的时候影响其他定时器
+  21   1                 方式1：16位加1计数器 */
+  22   1              TMOD |= 0x01;
+  23   1              
+  24   1              // 打开定时器0
+  25   1              TR0 = 1;
+  26   1              
+  27   1              // 此处注意，由于需要重装载，不要让程序过多计算
+  28   1              TH0 = TH_Init;
+  29   1              TL0 = TL_Init;
+  30   1              
+  31   1              // 定时器0中断和总中断开关打开
+  32   1              ET0 = 1;
+  33   1              EA  = 1;
+  34   1      }
+  35          
+  36          void main()
+  37          {
+  38   1              TINT0_Init();
+  39   1              SW_Out = 1;
+  40   1              while(1);
+  41   1      }
+  42          
+  43          void TINT0() interrupt 1
+  44          {
+  45   1              // 重装载
+  46   1              TH0 = TH_Init;
+  47   1              TL0 = TL_Init;
+  48   1              
+  49   1              // 电平翻转
+  50   1              SW_Out = ~SW_Out;
+  51   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.57.0.0   TIMER_COUNTER_SQUAREWAVE_MAIN                                     05/29/2020 10:46:34 PAGE 2   
+
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+>>>>>>> 64c192fc79434a4be878e64dcbbf3fda3a7e4b5e
