@@ -1,7 +1,10 @@
 @echo off 
+del *.lst /s
+del *.m51 /s
 del *.htm /s
 del *.obj /s
 del *.lnp /s
+del *.Administrator /s
 set input=
 set /p input=请输入提交信息:
 echo 开始添加整体
