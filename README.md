@@ -25,4 +25,5 @@ By Linkat Horizon
 | 8    | [LCD1602实验](https://github.com/ebhorizon/Embedded_System_MCS51/tree/master/8_LCD1602) | **Main:**<br/>1 × STC90C516RD+ (12MHz)<br />**Others:**<br/>1 × HD44780 | **Platform:**<br/>1 × Prechin HC6800-EM3 v2.2<br/>**Module:**<br/>1 × SCM1602C v2.0<br/>(1 × SCM1602A v3.0) |
 | 9    | [蜂鸣器实验](https://github.com/ebhorizon/Embedded_System_MCS51/tree/master/9_Buzzer) | **Main:**<br/>1 × STC90C516RD+ (12MHz)                       | **Platform:**<br/>1 × Prechin HC6800-EM3 v2.2                |
 | 10   | [电机相关实验](https://github.com/ebhorizon/Embedded_System_MCS51/tree/master/10_Motor) | **Main:**<br/>1 × STC90C516RD+ (12MHz)<br/>**Others:**<br/>1 × ULN2003<br/>1 × UND2916 | **Platform:**<br/>1 × Prechin HC6800-EM3 v2.2                |
+| 11   | [脉冲发生器实验](https://github.com/ebhorizon/Embedded_System_MCS51/tree/master/11_Pulse_Generator) | **Main:**<br/>1 × STC90C516RD+ (12MHz)<br/>**Others:**<br/>1 × NE555 | **Platform:**<br/>1 × Prechin HC6800-EM3 v2.2                |
 
