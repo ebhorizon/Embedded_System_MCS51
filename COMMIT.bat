@@ -5,6 +5,12 @@ del *.htm /s
 del *.obj /s
 del *.lnp /s
 del *.Administrator /s
+for /f "delims=" %%i in ('dir /ad /b /s "OBJ"') do (
+   rd /s /q "%%i"
+)
+for /f "delims=" %%i in ('dir /ad /b /s "Listings"') do (
+   rd /s /q "%%i"
+)
 set input=
 set /p input=请输入提交信息:
 echo 开始添加整体

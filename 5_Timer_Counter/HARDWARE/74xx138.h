@@ -9,7 +9,7 @@
 #define u8 unsigned char
 #endif
 #ifndef u16
-#define u16  unsigned int
+#define u16 unsigned int
 #endif
 
 // ¶¨Òå3-8ÒëÂëÆ÷µÄABC½Å
