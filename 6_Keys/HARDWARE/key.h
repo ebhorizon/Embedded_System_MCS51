@@ -8,7 +8,7 @@
 #define u8 unsigned char
 #endif
 #ifndef u16
-#define u16  unsigned int
+#define u16 unsigned int
 #endif
 
 // 定义按键使用引脚
